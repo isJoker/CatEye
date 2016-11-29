@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wjc.cateye.app.SplashActivity"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/splash_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash"
+        android:scaleType="fitXY"/>
+
+    <Button
+        android:id="@+id/btn_skip"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:text="跳过"
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/btn_skip_selector"/>
+
+</RelativeLayout>

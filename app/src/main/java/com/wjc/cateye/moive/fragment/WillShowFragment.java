@@ -1,4 +1,4 @@
-package com.wjc.cateye.find.fragment;
+package com.wjc.cateye.moive.fragment;
 
 import com.wjc.cateye.R;
 import com.wjc.cateye.base.BaseFragment;
@@ -6,10 +6,10 @@ import com.wjc.cateye.base.BaseFragment;
 /**
  * Created by ${万嘉诚} on 2016/11/30.
  * WeChat：wjc398556712
- * Function：
+ * Function：待映页
  */
 
-public class FindFragment extends BaseFragment{
+public class WillShowFragment extends BaseFragment {
     @Override
     protected String getUrl() {
         return null;
@@ -22,6 +22,6 @@ public class FindFragment extends BaseFragment{
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_find;
+        return R.layout.fragment_will_show;
     }
 }

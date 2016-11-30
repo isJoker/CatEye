@@ -2,14 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/holo_red_light">
+    xmlns:joker="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="电影"
-        android:textSize="30sp"
-        android:gravity="center"/>
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@android:color/holo_red_light">
+
+        <TextView
+            android:id="@+id/btn_select_city"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="北京"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/triangle_beijing"/>
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/tl_sliding_tab"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            joker:tl_bar_color="#a5ff0000"
+            joker:tl_indicator_color="#ffffff"
+            joker:tl_indicator_corner_radius="5dp"
+            joker:tl_tab_padding="15dp"
+            joker:tl_textSelectColor="#fd4444"
+            joker:tl_textUnselectColor="#ffffff"
+            joker:tl_indicator_style="BLOCK"
+            joker:tl_textsize="18sp"/>
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 </LinearLayout>

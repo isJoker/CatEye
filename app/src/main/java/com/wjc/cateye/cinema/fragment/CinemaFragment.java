@@ -11,6 +11,16 @@ import com.wjc.cateye.base.BaseFragment;
 
 public class CinemaFragment extends BaseFragment{
     @Override
+    protected String getUrl() {
+        return null;
+    }
+
+    @Override
+    protected void initData(String content) {
+
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.fragment_cinema;
     }

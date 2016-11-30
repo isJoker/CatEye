@@ -19,7 +19,7 @@
         android:layout_alignParentBottom="true"
         android:background="#f4f4f4"
         android:orientation="horizontal"
-        android:padding="2dp">
+        android:padding="1dp">
 
         <RadioButton
             android:id="@+id/rb_movie"

@@ -20,8 +20,8 @@
                 android:src="@drawable/nowifi" />
 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/icon_nowifi"/>
 
         </FrameLayout>
@@ -41,6 +41,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
             android:text="点击刷新"
+            android:textSize="15sp"
             android:textColor="@android:color/holo_red_light"
             android:background="@drawable/btn_nowifi_selector"/>
 

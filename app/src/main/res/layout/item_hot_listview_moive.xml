@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:id="@+id/img_poster"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:src="@drawable/default_moive"/>
+
+            <ImageView
+                android:id="@+id/img_play_moive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/play_moive"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="神奇动物在哪里"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/tv_3d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3D"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/lv_3d_bg"
+                    android:padding="2dp"/>
+
+                <TextView
+                    android:id="@+id/tv_imax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="IMAX"
+                    android:textSize="10sp"
+                    android:background="@drawable/lv_imax_bg"
+                    android:textColor="#8ab6cd"
+                    android:padding="2dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="观众"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_audience_grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9.0"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="#ff9900"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="10dp"
+                    android:background="#7c404040"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="专业"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6.9"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="#ff9900"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_scm"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="神奇动物城，法师显超能"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tv_show_info"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今天165家影院放映2090场"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_buy_ticket"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:text="购票"
+            android:textSize="12sp"
+            android:textColor="@android:color/holo_red_light"
+            android:background="@drawable/btn_buy_gb"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#44dadada"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="5dp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_topic1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="专题"
+                android:textSize="12sp"
+                android:textColor="#ff7300"
+                android:background="@drawable/topic_bg"
+                android:padding="3dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="麻瓜必背！神奇动物超全资料库"
+                android:layout_marginLeft="8dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#44dadada"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="5dp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_topic2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="专题"
+                android:textSize="12sp"
+                android:textColor="#ff7300"
+                android:background="@drawable/topic_bg"
+                android:padding="3dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="魔法动物学家纽特·斯卡曼德的前世今生"
+                android:layout_marginLeft="8dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

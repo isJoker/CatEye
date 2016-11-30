@@ -129,6 +129,7 @@ public abstract class LoadingPage extends FrameLayout {
 //            Animation operatingAnim = AnimationUtils.loadAnimation(MyApplication.mContext, R.anim.rotate);
 //            LinearInterpolator lin = new LinearInterpolator();
 //            operatingAnim.setInterpolator(lin);
+//            progress_loading.startAnimation(operatingAnim);
         }
 
         if (successView == null) {

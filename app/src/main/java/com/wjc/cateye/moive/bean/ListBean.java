@@ -131,7 +131,7 @@ public class ListBean {
             private boolean value3d;
             private int pn;
             private String img;
-            private int sc;
+            private float sc;
             private String ver;
             private String rt;
             private String scm;
@@ -248,11 +248,11 @@ public class ListBean {
                 this.img = img;
             }
 
-            public int getSc() {
+            public float getSc() {
                 return sc;
             }
 
-            public void setSc(int sc) {
+            public void setSc(float sc) {
                 this.sc = sc;
             }
 

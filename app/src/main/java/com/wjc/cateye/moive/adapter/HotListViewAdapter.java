@@ -26,13 +26,13 @@ import butterknife.ButterKnife;
  * Function：
  */
 
-public class ListViewAdapter extends BaseAdapter {
+public class HotListViewAdapter extends BaseAdapter {
 
     private List<ListBean.DataBean.MoviesBean> beanList;
     private Context mContext;
 
 
-    public ListViewAdapter(List<ListBean.DataBean.MoviesBean> beanList, Context mContext) {
+    public HotListViewAdapter(List<ListBean.DataBean.MoviesBean> beanList, Context mContext) {
         this.beanList = beanList;
         this.mContext = mContext;
     }

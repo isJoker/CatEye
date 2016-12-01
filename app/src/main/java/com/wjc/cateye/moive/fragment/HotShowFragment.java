@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.wjc.cateye.R;
 import com.wjc.cateye.base.BaseFragment;
-import com.wjc.cateye.moive.adapter.ListViewAdapter;
+import com.wjc.cateye.moive.adapter.HotListViewAdapter;
 import com.wjc.cateye.moive.bean.HotViewpagerBean;
 import com.wjc.cateye.moive.bean.ListBean;
 import com.wjc.cateye.utils.Constans;
@@ -85,7 +85,7 @@ public class HotShowFragment extends BaseFragment {
         //给ListView添加头布局
         listviewHomeShow.addHeaderView(headerView);
 
-        listviewHomeShow.setAdapter(new ListViewAdapter(movies, getActivity()));
+        listviewHomeShow.setAdapter(new HotListViewAdapter(movies, getActivity()));
 
     }
 
@@ -113,7 +113,7 @@ public class HotShowFragment extends BaseFragment {
         }
 
         //初始化头布局
-        headerView = View.inflate(getActivity(), R.layout.listview_head,null);
+        headerView = View.inflate(getActivity(), R.layout.hot_show_listview_head,null);
         banner = (Banner) headerView.findViewById(R.id.banner);
 
         //设置banner样式

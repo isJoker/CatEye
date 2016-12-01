@@ -31,6 +31,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile project(path: ':FlycoTabLayout_Lib')
     compile 'com.youth.banner:banner:1.4.2'
-    compile files('libs/fastjson-1.2.4.jar')
     compile project(':okhttputils')
 }

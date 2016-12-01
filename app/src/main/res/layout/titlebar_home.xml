@@ -6,6 +6,7 @@
     android:gravity="center">
 
     <LinearLayout
+        android:id="@+id/ll_search"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="@drawable/titlebar_home_bg"

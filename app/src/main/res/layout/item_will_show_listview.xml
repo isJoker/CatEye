@@ -5,6 +5,16 @@
     android:padding="10dp"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tv_coming_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="12月18日 周四"
+        android:textSize="15sp"
+        android:textColor="#2b2b2b"
+        android:padding="5dp"
+        android:background="#f4f4f4"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +29,7 @@
                 android:id="@+id/img_poster"
                 android:layout_width="70dp"
                 android:layout_height="100dp"
-                android:src="@drawable/default_moive"/>
+                android:src="@drawable/moive_defalt_will_show"/>
 
             <ImageView
                 android:id="@+id/img_play_moive"
@@ -79,41 +89,21 @@
                 android:layout_marginLeft="5dp">
 
                 <TextView
+                    android:id="@+id/tv_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="观众"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:id="@+id/tv_audience_grade"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="9.0"
+                    android:text="250"
                     android:textSize="15sp"
                     android:layout_marginLeft="2dp"
                     android:textColor="#ff9900"/>
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="10dp"
-                    android:background="#7c404040"
-                    android:layout_marginLeft="5dp"
-                    android:layout_gravity="center"/>
-
                 <TextView
+                    android:id="@+id/tv_zhuanye"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="专业"
+                    android:text="人想看"
                     android:textSize="12sp"
                     android:layout_marginLeft="5dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="6.9"
-                    android:textSize="15sp"
-                    android:layout_marginLeft="2dp"
-                    android:textColor="#ff9900"/>
 
             </LinearLayout>
 
@@ -134,15 +124,18 @@
 
         </LinearLayout>
 
-        <Button
+        <TextView
             android:id="@+id/btn_buy_ticket"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:text="购票"
+            android:text="想看"
             android:textSize="12sp"
             android:textColor="@android:color/holo_red_light"
-            android:background="@drawable/btn_buy_gb"/>
+            android:background="@drawable/btn_buy_gb"
+            android:gravity="center"
+            android:drawableLeft="@drawable/xihuan_xin"
+            android:paddingLeft="8dp"/>
 
     </LinearLayout>
 

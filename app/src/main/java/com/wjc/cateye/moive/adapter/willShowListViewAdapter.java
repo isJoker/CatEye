@@ -72,6 +72,10 @@ public class willShowListViewAdapter extends BaseAdapter {
                 holder.tvComingTitle.setVisibility(View.VISIBLE);
             }
         }
+
+        if(position == 0) {
+            holder.tvComingTitle.setVisibility(View.VISIBLE);
+        }
         lastComingTitle = comingTitle;
 
 //        Glide.with(mContext).load(bean.getImg()).into(holder.imgPoster);

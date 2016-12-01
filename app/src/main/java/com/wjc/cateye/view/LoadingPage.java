@@ -120,7 +120,7 @@ public abstract class LoadingPage extends FrameLayout {
             progress_loading = (ImageView)loadingView.findViewById(R.id.progress_loading);
 
             RotateAnimation rotateAnimation = new RotateAnimation(0,360,RotateAnimation.RELATIVE_TO_SELF,0.5f,RotateAnimation.RELATIVE_TO_SELF,0.5f);
-            rotateAnimation.setDuration(1000);
+            rotateAnimation.setDuration(300);
             rotateAnimation.setRepeatCount(Animation.INFINITE);
             rotateAnimation.setInterpolator(new LinearInterpolator());
             progress_loading.startAnimation(rotateAnimation);

@@ -15,14 +15,14 @@
             android:id="@+id/btn_select_city"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="北京"
-            android:textSize="18sp"
+            android:text="武汉"
+            android:textSize="15sp"
             android:textColor="@android:color/white"
             android:gravity="center_vertical"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
             android:drawablePadding="5dp"
-            android:drawableRight="@drawable/triangle_beijing"/>
+            android:drawableRight="@drawable/show_city01"/>
 
         <com.flyco.tablayout.SlidingTabLayout
             android:id="@+id/tl_sliding_tab"

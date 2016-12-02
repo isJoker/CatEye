@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.wjc.cateye.R;
@@ -18,6 +19,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import okhttp3.Call;
 
 import static com.wjc.cateye.app.MyApplication.mContext;
@@ -31,6 +33,14 @@ import static com.wjc.cateye.app.MyApplication.mContext;
 public class FindMoiveFragment extends BaseFragment {
 
 
+    @Bind(R.id.ll_hot_show)
+    LinearLayout llHotShow;
+    @Bind(R.id.ll_most_will_show)
+    LinearLayout llMostWillShow;
+    @Bind(R.id.ll_overseas)
+    LinearLayout llOverseas;
+    @Bind(R.id.ll_top100)
+    LinearLayout llTop100;
     private String[] type = new String[]{"爱情", "喜剧", "动画", "剧情", "恐怖", "惊悚", "科幻", "动作", "悬疑", "犯罪", "冒险", "战争", "奇幻", "运动", "家庭", "古装", "武侠", "西部", "历史", "传记", "情色", "歌舞", "黑色电影", "短片", "纪录片", "其他"};
     private String[] address = new String[]{"大陆", "美国", "韩国", "日本", "中国香港", "中国台湾", "泰国", "印度", "法国", "英国", "俄罗斯", "意大利", "西班牙", "德国", "波兰", "澳大利亚", "伊朗", "其他"};
     private String[] year = new String[]{"2017以后", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2000-2010", "90年代", "80年代", "70年代", "更早"};
@@ -53,15 +63,35 @@ public class FindMoiveFragment extends BaseFragment {
 
     @Override
     protected void initData(String content) {
-
+        //设置类型数据
         setTypeData();
-
+        //设置地区数据
         setAddressData();
-
+        //设置年代数据
         setYearData();
-
+        //设置电影奖项
         setMoiveAwards();
+
     }
+
+    @OnClick({R.id.ll_hot_show,R.id.ll_most_will_show,R.id.ll_overseas,R.id.ll_top100})
+    void onllClick(View view){
+        switch (view.getId()) {
+            case R.id.ll_hot_show :
+                Toast.makeText(mContext, "热映口碑", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_most_will_show :
+                Toast.makeText(mContext, "最受期待", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_overseas :
+                Toast.makeText(mContext, "海外电影", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_top100 :
+                Toast.makeText(mContext, "TOP100", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
 
     private void setMoiveAwards() {
         getMoiveAwardsDataForNet();
@@ -99,10 +129,17 @@ public class FindMoiveFragment extends BaseFragment {
             llParsams.setMargins(0, DensityUtil.dip2px(mContext, 10), 0, DensityUtil.dip2px(mContext, 10));
             MoiveAwardsBean.DataBean.FestivalsBean bean = data.get(i);
             View view = View.inflate(mContext, R.layout.item_moive_award, null);
-            TextView textView = (TextView) view.findViewById(R.id.tv_awards_title);
+            final TextView textView = (TextView) view.findViewById(R.id.tv_awards_title);
             textView.setText(bean.getFestivalName());
             llMoiveAwards.addView(view, llParsams);
 
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TextView title = (TextView) v.findViewById(R.id.tv_awards_title);
+                    Toast.makeText(mContext, title.getText(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -114,6 +151,13 @@ public class FindMoiveFragment extends BaseFragment {
             TextView view = (TextView) View.inflate(mContext, R.layout.item_find_text, null);
             view.setText(year[i]);
             llYear.addView(view, llParsams);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -125,6 +169,13 @@ public class FindMoiveFragment extends BaseFragment {
             TextView view = (TextView) View.inflate(mContext, R.layout.item_find_text, null);
             view.setText(address[i]);
             lladress.addView(view, llParsams);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
     }
@@ -135,9 +186,17 @@ public class FindMoiveFragment extends BaseFragment {
 
             LinearLayout.LayoutParams llParsams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             llParsams.setMargins(DensityUtil.dip2px(mContext, 10), 0, DensityUtil.dip2px(mContext, 10), 0);
-            TextView view = (TextView) View.inflate(mContext, R.layout.item_find_text, null);
+            final TextView view = (TextView) View.inflate(mContext, R.layout.item_find_text, null);
             view.setText(type[i]);
             llType.addView(view, llParsams);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
     }
 

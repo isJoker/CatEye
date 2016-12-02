@@ -1,8 +1,14 @@
 package com.wjc.cateye.app;
 
 import android.app.Application;
+import android.app.Service;
 import android.content.Context;
 import android.os.Handler;
+import android.os.Vibrator;
+
+import com.baidu.location.service.LocationService;
+import com.baidu.mapapi.SDKInitializer;
+
 
 /**
  * Created by ${万嘉诚} on 2016/11/11.
@@ -17,6 +23,9 @@ public class MyApplication extends Application {
     public static Thread mThread;//获取当前应用的线程：主线程
     public static int currentThreadId;//获取主线程id
 
+    public LocationService locationService;
+    public Vibrator mVibrator;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -28,5 +37,13 @@ public class MyApplication extends Application {
 
         //初始化异常处理器
 //        CrashHandler.getInstance().init(this);
+
+        /***
+         * 初始化定位sdk，建议在Application中创建
+         */
+        locationService = new LocationService(getApplicationContext());
+        mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
+        SDKInitializer.initialize(getApplicationContext());
+
     }
 }

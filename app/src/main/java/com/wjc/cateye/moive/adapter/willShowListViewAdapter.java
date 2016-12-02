@@ -79,6 +79,13 @@ public class willShowListViewAdapter extends BaseAdapter {
         lastComingTitle = comingTitle;
 
 //        Glide.with(mContext).load(bean.getImg()).into(holder.imgPoster);
+
+        //获取视频的第一帧作为海报封面
+//        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+//        retriever.setDataSource(bean.getVideourl());
+//        Bitmap bitmap = retriever.getFrameAtTime();
+//        holder.imgPoster.setImageBitmap(bitmap);
+
         holder.tvTitle.setText(bean.getNm());
         holder.tvScm.setText(bean.getScm());
         holder.tvShowInfo.setText(bean.getShowInfo());

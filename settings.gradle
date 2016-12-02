@@ -1,1 +1,1 @@
-include ':app', ':FlycoTabLayout_Lib', ':okhttputils'
+include ':app', ':FlycoTabLayout_Lib', ':okhttputils', ':indexlib'

@@ -47,4 +47,11 @@
         android:layout_marginTop="15dp"
         android:padding="5dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="奇异博士"
+        android:textColor="#0a0a0a"
+        android:textSize="15sp"/>
+
 </LinearLayout>

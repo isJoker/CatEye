@@ -261,7 +261,7 @@ public class IndexBar extends View {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
             default:
-                setBackgroundResource(android.R.color.transparent);//手指抬起时背景恢复透明
+                setBackgroundColor(Color.TRANSPARENT);//手指抬起时背景恢复透明
                 //回调监听器
                 if (null != mOnIndexPressedListener) {
                     mOnIndexPressedListener.onMotionEventEnd();

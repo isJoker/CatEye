@@ -1,9 +1,9 @@
 package com.wjc.cateye.moive.selectcity.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,11 +24,12 @@ import com.wjc.cateye.moive.selectcity.model.MeituanTopHeaderBean;
 import com.wjc.cateye.moive.selectcity.utils.CommonAdapter;
 import com.wjc.cateye.moive.selectcity.utils.HeaderRecyclerAndFooterWrapperAdapter;
 import com.wjc.cateye.moive.selectcity.utils.ViewHolder;
+import com.wjc.cateye.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectCityActivity extends AppCompatActivity {
+public class SelectCityActivity extends Activity {
 
     private Context mContext;
     private RecyclerView mRv;
@@ -62,6 +63,7 @@ public class SelectCityActivity extends AppCompatActivity {
 
         mContext = this;
 
+        //最外层RecyclerView
         mRv = (RecyclerView) findViewById(R.id.rv);
         mRv.setLayoutManager(mManager = new LinearLayoutManager(this));
 
@@ -77,18 +79,19 @@ public class SelectCityActivity extends AppCompatActivity {
         mHeaderDatas.add(new MeituanHeaderBean(hotCitys, "热门城市", "#"));
         mSourceDatas.addAll(mHeaderDatas);
 
-        mAdapter = new MeituanAdapter(this, R.layout.meituan_item_select_city, mBodyDatas);
+        mAdapter = new MeituanAdapter(this, R.layout.city_item_select_city, mBodyDatas);
+        //utils
         mHeaderAdapter = new HeaderRecyclerAndFooterWrapperAdapter(mAdapter) {
 
             @Override
             protected void onBindHeaderHolder(ViewHolder holder, int headerPos, int layoutId, Object o) {
                 switch (layoutId) {
-                    case R.layout.meituan_item_header:
+                    case R.layout.city_item_header:
                         final MeituanHeaderBean meituanHeaderBean = (MeituanHeaderBean) o;
                         //网格
                         RecyclerView recyclerView = holder.getView(R.id.rvCity);
                         recyclerView.setAdapter(
-                                new CommonAdapter<String>(mContext, R.layout.meituan_item_header_item, meituanHeaderBean.getCityList()) {
+                                new CommonAdapter<String>(mContext, R.layout.city_item_header_item, meituanHeaderBean.getCityList()) {
                                     @Override
                                     public void convert(ViewHolder holder, final String cityName) {
                                         holder.setText(R.id.tvName, cityName);
@@ -102,7 +105,7 @@ public class SelectCityActivity extends AppCompatActivity {
                                 });
                         recyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
                         break;
-                    case R.layout.meituan_item_header_top:
+                    case R.layout.city_item_header_top:
                         MeituanTopHeaderBean meituanTopHeaderBean = (MeituanTopHeaderBean) o;
                         if(meituanTopHeaderBean != null) {
                             holder.setText(R.id.tvCurrent, meituanTopHeaderBean.getTxt());
@@ -114,11 +117,11 @@ public class SelectCityActivity extends AppCompatActivity {
             }
         };
 
-//        mHeaderAdapter.setHeaderView(0, R.layout.meituan_item_header_top, new MeituanTopHeaderBean("北京"));
-        mHeaderAdapter.setHeaderView(0, R.layout.meituan_item_header_top, null);
-        mHeaderAdapter.setHeaderView(1, R.layout.meituan_item_header, mHeaderDatas.get(0));
-        mHeaderAdapter.setHeaderView(2, R.layout.meituan_item_header, mHeaderDatas.get(1));
-        mHeaderAdapter.setHeaderView(3, R.layout.meituan_item_header, mHeaderDatas.get(2));
+//        mHeaderAdapter.setHeaderView(0, R.layout.city_item_header_top, new MeituanTopHeaderBean("北京"));
+//        mHeaderAdapter.setHeaderView(0, R.layout.city_item_header_top, null);
+        mHeaderAdapter.setHeaderView(0, R.layout.city_item_header, mHeaderDatas.get(0));
+        mHeaderAdapter.setHeaderView(1, R.layout.city_item_header, mHeaderDatas.get(1));
+        mHeaderAdapter.setHeaderView(2, R.layout.city_item_header, mHeaderDatas.get(2));
 
         //设置RecyclerView的适配器
         mRv.setAdapter(mHeaderAdapter);
@@ -183,6 +186,7 @@ public class SelectCityActivity extends AppCompatActivity {
                 //得到传递过来的当前城市
                 Intent intent = getIntent();
                 String current_city = intent.getStringExtra("current_city");
+                LogUtil.e("current_city---------------->" + current_city);
                 header1.getCityList().add(current_city);
 
                 MeituanHeaderBean header2 = mHeaderDatas.get(1);
@@ -205,31 +209,10 @@ public class SelectCityActivity extends AppCompatActivity {
                 hotCitys.add("重庆");
                 header3.setCityList(hotCitys);
 
-                mHeaderAdapter.notifyItemRangeChanged(1, 3);
+                mHeaderAdapter.notifyItemRangeChanged(0, 3);
 
             }
         }, 2000);
 
     }
-
-    /**
-     * 更新数据源
-     *
-     * @param view
-     */
-    public void updateDatas(View view) {
-        for (int i = 0; i < 5; i++) {
-            mBodyDatas.add(new MeiTuanBean("东京"));
-            mBodyDatas.add(new MeiTuanBean("大阪"));
-        }
-        //先排序
-        mIndexBar.getDataHelper().sortSourceDatas(mBodyDatas);
-        mSourceDatas.clear();
-        mSourceDatas.addAll(mHeaderDatas);
-        mSourceDatas.addAll(mBodyDatas);
-
-        mHeaderAdapter.notifyDataSetChanged();
-        mIndexBar.invalidate();
-    }
-
 }

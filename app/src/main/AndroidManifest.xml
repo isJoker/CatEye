@@ -56,7 +56,9 @@
         <activity
             android:name=".app.MainActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".moive.selectcity.activity.SelectCityActivity"></activity>
+        <activity android:name=".moive.selectcity.activity.SelectCityActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <!--集成百度地图定位-->
         <meta-data

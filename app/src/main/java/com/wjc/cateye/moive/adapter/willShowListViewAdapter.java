@@ -99,8 +99,14 @@ public class willShowListViewAdapter extends BaseAdapter {
         return convertView;
     }
 
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
     static class ViewHolder {
-        @Bind(R.id.tv_coming_title)
+        @Bind(R.id.tv_header)
         TextView tvComingTitle;
         @Bind(R.id.img_poster)
         ImageView imgPoster;
@@ -131,7 +137,7 @@ public class willShowListViewAdapter extends BaseAdapter {
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
-            tvComingTitle = (TextView) view.findViewById(R.id.tv_coming_title);
+            tvComingTitle = (TextView) view.findViewById(R.id.tv_header);
             imgPoster = (ImageView) view.findViewById(R.id.img_poster);
             imgPlayMoive = (ImageView) view.findViewById(R.id.img_play_moive);
             btnBuyTicket = (TextView) view.findViewById(R.id.btn_buy_ticket);

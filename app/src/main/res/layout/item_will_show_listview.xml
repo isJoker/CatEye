@@ -2,18 +2,9 @@
 <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_coming_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="12月18日 周四"
-        android:textSize="15sp"
-        android:textColor="#2b2b2b"
-        android:padding="5dp"
-        android:background="#f4f4f4"/>
+    <include layout="@layout/layout_sticky_header"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -135,7 +126,8 @@
             android:background="@drawable/btn_buy_gb"
             android:gravity="center"
             android:drawableLeft="@drawable/xihuan_xin"
-            android:paddingLeft="8dp"/>
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
 
     </LinearLayout>
 

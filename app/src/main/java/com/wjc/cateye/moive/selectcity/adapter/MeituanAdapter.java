@@ -16,6 +16,7 @@ import java.util.List;
  */
 
 public class MeituanAdapter extends CommonAdapter<MeiTuanBean> {
+
     public MeituanAdapter(Context context, int layoutId, List<MeiTuanBean> datas) {
         super(context, layoutId, datas);
     }

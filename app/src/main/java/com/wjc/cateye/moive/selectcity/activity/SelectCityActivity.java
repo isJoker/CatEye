@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mcxtzhang.indexlib.IndexBar.bean.BaseIndexPinyinBean;
 import com.mcxtzhang.indexlib.IndexBar.widget.IndexBar;
@@ -98,7 +97,10 @@ public class SelectCityActivity extends Activity {
                                         holder.getConvertView().setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(mContext, "cityName:" + cityName, Toast.LENGTH_SHORT).show();
+                                                Intent intent = getIntent();
+                                                intent.putExtra("city",cityName);
+                                                SelectCityActivity.this.setResult(RESULT_OK,intent);
+                                                finish();
                                             }
                                         });
                                     }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,19 +7,27 @@
     android:fitsSystemWindows="true"
     tools:context="com.wjc.cateye.app.MainActivity">
 
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_fragment"
+        <com.wjc.cateye.view.userefresh.SpringView
+            android:id="@+id/refresh_will_show"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical" />
+            android:background="@android:color/white">
 
-        <include layout="@layout/layout_sticky_header" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
 
+            <include layout="@layout/layout_sticky_header" />
+        </com.wjc.cateye.view.userefresh.SpringView>
     </FrameLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

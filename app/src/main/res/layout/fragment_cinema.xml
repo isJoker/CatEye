@@ -2,14 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/holo_blue_dark">
+    android:orientation="vertical">
 
-    <TextView
+    <com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:background="#dfaafd"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="影院"
-        android:textSize="30sp"
-        android:gravity="center"/>
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:background="#FFF"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="22222222222222222222222222222222222222
+                2222222222222222222222222222222222222222222
+                22222222222222222222222222222222222222222
+                22222222222222222222222222222222222222
+                22222222222222222222222222222222222
+                2222222222222222222222222222222222222
+                22222222222222222222222222222222222222222
+                222222222222222222222222222222222222222
+                22222222222222222222222222222222222222222222222222
+                222222222222222222222222222222222222222222222222222222"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+    </com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout>
+
 
 </LinearLayout>

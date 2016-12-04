@@ -3,5 +3,5 @@
     android:fromDegrees="0"
     android:pivotX="50%"
     android:pivotY="50%"
-    android:repeatCount="-1"
-    android:toDegrees="360"/>
+    android:toDegrees="360"
+    android:drawable="@drawable/loading_progress"/>

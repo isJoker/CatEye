@@ -3,17 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/progress_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/backgroud_logo01"
+    <ProgressBar
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:indeterminateDrawable="@anim/loading_rotate"
+        android:indeterminateDuration="800"
         android:layout_gravity="center"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/backgroud_logo02"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/loading_img"
         android:layout_gravity="center"/>
 
 </FrameLayout>

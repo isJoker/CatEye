@@ -9,6 +9,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.wjc.cateye.R;
 import com.wjc.cateye.base.BaseFragment;
 import com.wjc.cateye.moive.selectcity.activity.SelectCityActivity;
+import com.wjc.cateye.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by ${万嘉诚} on 2016/11/30.
@@ -46,6 +49,11 @@ public class MoiveFragment extends BaseFragment {
     protected void initData(String content) {
         EventBus.getDefault().register(this);
 
+
+
+
+
+
         //初始化Fragment
         initFragments();
 
@@ -69,12 +77,18 @@ public class MoiveFragment extends BaseFragment {
         //进入选择城市界面
         Intent intent = new Intent(getActivity(), SelectCityActivity.class);
         intent.putExtra("current_city",sequence);
-        startActivity(intent);
+        startActivityForResult(intent,0);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0 && resultCode == RESULT_OK) {
+            String city = data.getStringExtra("city");
+            LogUtil.e("city==========>" + city);
+            btnSelectCity.setText(city);
+        }
+
     }
 
     private void initFragments() {

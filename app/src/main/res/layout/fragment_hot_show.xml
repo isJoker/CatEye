@@ -4,10 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/listview_home_show"
+    <com.wjc.cateye.view.userefresh.SpringView
+        android:id="@+id/refresh_hot_show"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
+        <ListView
+            android:id="@+id/listview_home_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.wjc.cateye.view.userefresh.SpringView>
 </LinearLayout>

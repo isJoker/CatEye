@@ -8,12 +8,16 @@ import android.widget.ListView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.wjc.cateye.R;
+import com.wjc.cateye.app.MyApplication;
 import com.wjc.cateye.base.BaseFragment;
 import com.wjc.cateye.moive.adapter.HotListViewAdapter;
 import com.wjc.cateye.moive.bean.HotViewpagerBean;
 import com.wjc.cateye.moive.bean.ListBean;
 import com.wjc.cateye.utils.Constans;
 import com.wjc.cateye.utils.LogUtil;
+import com.wjc.cateye.view.userefresh.CatEyeFooter;
+import com.wjc.cateye.view.userefresh.CatEyeHeader;
+import com.wjc.cateye.view.userefresh.SpringView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -37,6 +41,8 @@ public class HotShowFragment extends BaseFragment {
 
     @Bind(R.id.listview_home_show)
     ListView listviewHomeShow;
+    @Bind(R.id.refresh_hot_show)
+    SpringView refreshHotShow;
     private Banner banner;
     private View headerView;
 
@@ -47,10 +53,48 @@ public class HotShowFragment extends BaseFragment {
 
     @Override
     protected void initData(String content) {
+
+        initRefresh();
+
         //解析ViewPager数据
         processData(content);
         //联网请求ListView数据
         getListViewDataForNet();
+    }
+
+    private void initRefresh() {
+        refreshHotShow.setType(SpringView.Type.FOLLOW);
+        //开始执行刷新
+        refreshHotShow.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+
+                //模拟联网延时
+                MyApplication.mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshHotShow.onFinishFreshAndLoad();
+                    }
+                },2000);
+
+            }
+
+            @Override
+            public void onLoadmore() {
+                refreshHotShow.callFresh();
+
+                //模拟联网延时
+                MyApplication.mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshHotShow.onFinishFreshAndLoad();
+                    }
+                },1000);
+            }
+        });
+
+        refreshHotShow.setHeader(new CatEyeHeader(getActivity()));
+        refreshHotShow.setFooter(new CatEyeFooter());
     }
 
     private void getListViewDataForNet() {
@@ -113,7 +157,7 @@ public class HotShowFragment extends BaseFragment {
         }
 
         //初始化头布局
-        headerView = View.inflate(getActivity(), R.layout.hot_show_listview_head,null);
+        headerView = View.inflate(getActivity(), R.layout.hot_show_listview_head, null);
         banner = (Banner) headerView.findViewById(R.id.banner);
 
         //设置banner样式

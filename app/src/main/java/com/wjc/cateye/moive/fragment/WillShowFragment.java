@@ -7,10 +7,14 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.wjc.cateye.R;
+import com.wjc.cateye.app.MyApplication;
 import com.wjc.cateye.base.BaseFragment;
 import com.wjc.cateye.moive.adapter.WillShowRecyclerAdapter;
 import com.wjc.cateye.moive.bean.WillShowListBean;
 import com.wjc.cateye.utils.Constans;
+import com.wjc.cateye.view.userefresh.CatEyeFooter;
+import com.wjc.cateye.view.userefresh.CatEyeHeader;
+import com.wjc.cateye.view.userefresh.SpringView;
 
 import java.util.List;
 
@@ -31,6 +35,8 @@ public class WillShowFragment extends BaseFragment {
     RecyclerView rvFragment;
     @Bind(R.id.tv_header)
     TextView tvHeader;
+    @Bind(R.id.refresh_will_show)
+    SpringView refreshWillShow;
     private List<WillShowListBean.DataBean.ComingBean> beanList;
 
     @Override
@@ -41,11 +47,48 @@ public class WillShowFragment extends BaseFragment {
     @Override
     protected void initData(String content) {
 
+        initRfresh();
+
         //解析数据
         processData(content);
 
         initRecyclerView();
 
+    }
+
+    private void initRfresh() {
+        refreshWillShow.setType(SpringView.Type.FOLLOW);
+        refreshWillShow.setGive(SpringView.Give.BOTH);
+        //开始执行刷新
+        refreshWillShow.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+
+                //模拟联网延时
+                MyApplication.mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshWillShow.onFinishFreshAndLoad();
+                    }
+                },2000);
+
+            }
+
+            @Override
+            public void onLoadmore() {
+
+                //模拟联网延时
+                MyApplication.mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshWillShow.onFinishFreshAndLoad();
+                    }
+                },1000);
+            }
+        });
+
+        refreshWillShow.setHeader(new CatEyeHeader(getActivity()));
+        refreshWillShow.setFooter(new CatEyeFooter());
     }
 
     private void processData(String json) {
@@ -62,7 +105,7 @@ public class WillShowFragment extends BaseFragment {
         assert tvHeader != null;
 
         rvFragment.setLayoutManager(new LinearLayoutManager(mContext));
-        rvFragment.setAdapter(new WillShowRecyclerAdapter(mContext,beanList));
+        rvFragment.setAdapter(new WillShowRecyclerAdapter(mContext, beanList));
         rvFragment.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
@@ -73,15 +116,16 @@ public class WillShowFragment extends BaseFragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
+                //得到第一个可见的位置
                 int firstVisibleItemPosition = ((LinearLayoutManager) (recyclerView.getLayoutManager())).findFirstVisibleItemPosition();
 
-                if(firstVisibleItemPosition == 0) {
+                if (firstVisibleItemPosition == 0) {//设置第一个悬浮title是否可见
                     tvHeader.setVisibility(View.GONE);
                 } else {
                     tvHeader.setVisibility(View.VISIBLE);
                 }
-                
+
+                //设置悬浮效果及动画
                 // Get the sticky information from the topmost view of the screen.
                 View stickyInfoView = recyclerView.findChildViewUnder(
                         tvHeader.getMeasuredWidth() / 2, 5);
@@ -119,4 +163,5 @@ public class WillShowFragment extends BaseFragment {
     public int getLayoutId() {
         return R.layout.fragment_will_show;
     }
+
 }

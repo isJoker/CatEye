@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="60dp">
+
+    <com.wjc.cateye.view.userefresh.RefreshView
+        android:visibility="visible"
+        android:layout_marginTop="10dp"
+        android:id="@+id/maoyan_header"
+        android:adjustViewBounds="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"/>
+    <FrameLayout
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/progress_maoyan"
+        android:layout_width="40dp"
+        android:layout_height="40dp">
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            style="?android:progressBarStyleInverse"
+            android:indeterminateDuration="1000"
+            android:indeterminateDrawable="@anim/loading_rotate"
+            />
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="30dp"
+            android:background="@drawable/loading_img"
+            android:layout_height="30dp" />
+    </FrameLayout>
+
+</LinearLayout>

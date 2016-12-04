@@ -5,11 +5,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 import com.wjc.cateye.R;
 import com.wjc.cateye.utils.LogUtil;
@@ -38,8 +34,6 @@ public abstract class LoadingPage extends FrameLayout {
     private static final int PAGE_STATE_ERROR = 2;
     private static final int PAGE_STATE_EMPTY = 3;
     private static final int PAGE_STATE_SUCCESS = 4;
-
-    private ImageView progress_loading;
 
     //当前的状态
     private int page_state_current = PAGE_STATE_LOADING;
@@ -114,23 +108,6 @@ public abstract class LoadingPage extends FrameLayout {
         loadingView.setVisibility(page_state_current == PAGE_STATE_LOADING ? VISIBLE : GONE);
         errorView.setVisibility(page_state_current == PAGE_STATE_ERROR ? VISIBLE : GONE);
         emptyView.setVisibility(page_state_current == PAGE_STATE_EMPTY ? VISIBLE : GONE);
-
-        if(page_state_current == PAGE_STATE_LOADING) {
-
-            progress_loading = (ImageView)loadingView.findViewById(R.id.progress_loading);
-
-            RotateAnimation rotateAnimation = new RotateAnimation(0,360,RotateAnimation.RELATIVE_TO_SELF,0.5f,RotateAnimation.RELATIVE_TO_SELF,0.5f);
-            rotateAnimation.setDuration(300);
-            rotateAnimation.setRepeatCount(Animation.INFINITE);
-            rotateAnimation.setInterpolator(new LinearInterpolator());
-            progress_loading.startAnimation(rotateAnimation);
-
-
-//            Animation operatingAnim = AnimationUtils.loadAnimation(MyApplication.mContext, R.anim.rotate);
-//            LinearInterpolator lin = new LinearInterpolator();
-//            operatingAnim.setInterpolator(lin);
-//            progress_loading.startAnimation(operatingAnim);
-        }
 
         if (successView == null) {
             successView = View.inflate(mContext, LayoutId(), null);//上下文为MainActivity

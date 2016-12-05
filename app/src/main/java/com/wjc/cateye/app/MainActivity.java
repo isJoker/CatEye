@@ -184,6 +184,9 @@ public class MainActivity extends FragmentActivity {
                 //发送EventBus事件
                 EventBus.getDefault().postSticky(new String(location.getCity()));
 
+                //禁掉定位服务
+                locationService.unregisterListener(mListener); //注销掉监听
+                locationService.stop(); //停止定位服务
             }
         }
 

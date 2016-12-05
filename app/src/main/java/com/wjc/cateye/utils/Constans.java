@@ -53,4 +53,24 @@ public class Constans {
     //全部电影奖项--最下面
     public static final String FID_QUANQIUJIANG = "http://api.meituan.com/mmdb/movie/region/festival/list.json?__vhost=api.maoyan.com&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=6801&utm_source=hiapk&utm_medium=android&utm_term=6.8.0&utm_content=000000000000000&ci=1&net=255&dModel=Custom%20Phone%20-%204.3%20-%20API%2018%20-%20768x1280&uuid=2C2C0ECD557F366849954BEF88D0017AC98AD8183EC9108E7D92853C8D3EF972&lat=0.0&lng=0.0&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1463704641616&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=072ad6f1-c10b-4c49-a076-74baae3b231e&__skcy=4UbKeGaCLKKn%2BqhEjZmJ96heHsE%3D";
 
+
+    public static final String FIND_HEAD_TITLE = "http://api.maoyan.com/sns/v2/buttons.json?utm_campaign=AmovieBmovieCD-1&movieBundleVersion=7501&utm_source=baidu2-dy&utm_medium=android&utm_term=7.5.0&utm_content=162785154327873&ci=1&net=255&dModel=CHM-TL00H&uuid=DD248CD671940B81A053CD16752CB1ED59F2F7716F6B2B1FDBA408C200CE86CD&lat=39.86921443098112&lng=116.42276039489884&__reqTraceID=4230162655252054367&refer=%2FShowActivity&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1480484674073&__skua=32bcf146c756ecefe7535b95816908e3&__skno=ccfae640-2bd5-4c64-97f0-b3652d31c073&__skcy=nQams8Z9xvIXamNUn8MBXUlPP%2Bg%3D";
+    public static final String FIND_BODY_MSG = "http://api.maoyan.com/sns/v5/feed.json?offset=";
+    public static final String FIND_BODY_MSGLAST = "&limit=10&timestamp=0&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=7501&utm_source=baidu2-dy&utm_medium=android&utm_term=7.5.0&utm_content=162785154327873&ci=1&net=255&dModel=CHM-TL00H&uuid=DD248CD671940B81A053CD16752CB1ED59F2F7716F6B2B1FDBA408C200CE86CD&lat=39.86921443098112&lng=116.42276039489884&__reqTraceID=289405745981786362&refer=%2FShowActivity&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1480484674048&__skua=32bcf146c756ecefe7535b95816908e3&__skno=24603878-2b32-4e55-86fc-1234e2b2c2a3&__skcy=lqDuUKMWOxn3O24ylqjgk4uMWws%3D";
+//  http://api.maoyan.com/sns/v5/feed.json?offset=10&limit=10&timestamp=0&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=7501&utm_source=baidu2-dy&utm_medium=android&utm_term=7.5.0&utm_content=162785154327873&ci=1&net=255&dModel=CHM-TL00H&uuid=DD248CD671940B81A053CD16752CB1ED59F2F7716F6B2B1FDBA408C200CE86CD&lat=39.86921443098112&lng=116.42276039489884&__reqTraceID=289405745981786362&refer=%2FShowActivity&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1480484674048&__skua=32bcf146c756ecefe7535b95816908e3&__skno=24603878-2b32-4e55-86fc-1234e2b2c2a3&__skcy=lqDuUKMWOxn3O24ylqjgk4uMWws%3D
+
+    /**
+     * 发现界面的Top100
+     */
+    public  static  final String  DISCOVER_TOP100 = "http://m.maoyan.com/information?_v_=yes&groupId=1481354&pageType=1&title=%E4%BB%8A%E6%97%A5TOP10&pushToken=dpshe3234c9ecd8e748e1eeae12b0ac4b78fatpu&f=android&cityId=1&userid=-1&cityId=1";
+    /**
+     * 发现界面的影视快讯
+     */
+    public  static  final String DISCOVER_NEWS= "http://m.maoyan.com/information?_v_=yes&f=android&userid=-1&pushToken=dpshe3234c9ecd8e748e1eeae12b0ac4b78fatpu&cityId=1";
+    /**
+     * 发现界面的实时票房
+     */
+    public static final String DISCOVER_BOOKING="http://piaofang.maoyan.com/?f=android&userid=-1&pushToken=dpshe3234c9ecd8e748e1eeae12b0ac4b78fatpu&cityId=1";
+
+
 }

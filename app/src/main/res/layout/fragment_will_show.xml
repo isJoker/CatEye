@@ -13,20 +13,20 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.wjc.cateye.view.userefresh.SpringView
+       <!-- <com.wjc.cateye.view.userefresh.SpringView
             android:id="@+id/refresh_will_show"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white">
+            android:background="@android:color/white">-->
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="vertical" />
+                android:scrollbars="none" />
 
             <include layout="@layout/layout_sticky_header" />
-        </com.wjc.cateye.view.userefresh.SpringView>
+       <!-- </com.wjc.cateye.view.userefresh.SpringView>-->
     </FrameLayout>
 
 

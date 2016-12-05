@@ -7,14 +7,10 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.wjc.cateye.R;
-import com.wjc.cateye.app.MyApplication;
 import com.wjc.cateye.base.BaseFragment;
 import com.wjc.cateye.moive.adapter.WillShowRecyclerAdapter;
 import com.wjc.cateye.moive.bean.WillShowListBean;
 import com.wjc.cateye.utils.Constans;
-import com.wjc.cateye.view.userefresh.CatEyeFooter;
-import com.wjc.cateye.view.userefresh.CatEyeHeader;
-import com.wjc.cateye.view.userefresh.SpringView;
 
 import java.util.List;
 
@@ -35,8 +31,8 @@ public class WillShowFragment extends BaseFragment {
     RecyclerView rvFragment;
     @Bind(R.id.tv_header)
     TextView tvHeader;
-    @Bind(R.id.refresh_will_show)
-    SpringView refreshWillShow;
+//    @Bind(R.id.refresh_will_show)
+//    SpringView refreshWillShow;
     private List<WillShowListBean.DataBean.ComingBean> beanList;
 
     @Override
@@ -47,7 +43,7 @@ public class WillShowFragment extends BaseFragment {
     @Override
     protected void initData(String content) {
 
-        initRfresh();
+//        initRfresh();
 
         //解析数据
         processData(content);
@@ -56,40 +52,40 @@ public class WillShowFragment extends BaseFragment {
 
     }
 
-    private void initRfresh() {
-        refreshWillShow.setType(SpringView.Type.FOLLOW);
-        refreshWillShow.setGive(SpringView.Give.BOTH);
-        //开始执行刷新
-        refreshWillShow.setListener(new SpringView.OnFreshListener() {
-            @Override
-            public void onRefresh() {
-
-                //模拟联网延时
-                MyApplication.mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshWillShow.onFinishFreshAndLoad();
-                    }
-                },2000);
-
-            }
-
-            @Override
-            public void onLoadmore() {
-
-                //模拟联网延时
-                MyApplication.mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshWillShow.onFinishFreshAndLoad();
-                    }
-                },1000);
-            }
-        });
-
-        refreshWillShow.setHeader(new CatEyeHeader(getActivity()));
-        refreshWillShow.setFooter(new CatEyeFooter());
-    }
+//    private void initRfresh() {
+//        refreshWillShow.setType(SpringView.Type.FOLLOW);
+//        refreshWillShow.setGive(SpringView.Give.BOTH);
+//        //开始执行刷新
+//        refreshWillShow.setListener(new SpringView.OnFreshListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//                //模拟联网延时
+//                MyApplication.mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        refreshWillShow.onFinishFreshAndLoad();
+//                    }
+//                },2000);
+//
+//            }
+//
+//            @Override
+//            public void onLoadmore() {
+//
+//                //模拟联网延时
+//                MyApplication.mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        refreshWillShow.onFinishFreshAndLoad();
+//                    }
+//                },1000);
+//            }
+//        });
+//
+//        refreshWillShow.setHeader(new CatEyeHeader(getActivity()));
+//        refreshWillShow.setFooter(new CatEyeFooter());
+//    }
 
     private void processData(String json) {
         //联网请求得到bean类

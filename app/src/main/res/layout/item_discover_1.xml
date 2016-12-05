@@ -84,7 +84,7 @@
                 android:drawablePadding="5dp"
                 android:text="3"
                 android:gravity="center"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="15dp"/>
 
         </LinearLayout>
 

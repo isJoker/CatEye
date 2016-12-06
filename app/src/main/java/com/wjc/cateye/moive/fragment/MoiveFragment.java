@@ -49,11 +49,6 @@ public class MoiveFragment extends BaseFragment {
     protected void initData(String content) {
         EventBus.getDefault().register(this);
 
-
-
-
-
-
         //初始化Fragment
         initFragments();
 

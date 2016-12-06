@@ -5,6 +5,8 @@
     android:orientation="vertical"
     android:background="@android:color/holo_green_dark">
 
+    <include layout="@layout/titlebar_home"/>
+
     <com.wjc.cateye.view.userefresh.SpringView
         android:id="@+id/refresh_find"
         android:layout_width="match_parent"

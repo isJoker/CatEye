@@ -78,6 +78,7 @@ public class FindFragment extends BaseFragment {
 
     private void initRefresh() {
         refreshFind.setType(SpringView.Type.FOLLOW);
+        refreshFind.setGive(SpringView.Give.TOP);
         //开始执行刷新
         refreshFind.setListener(new SpringView.OnFreshListener() {
             @Override

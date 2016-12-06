@@ -64,6 +64,7 @@ public class HotShowFragment extends BaseFragment {
 
     private void initRefresh() {
         refreshHotShow.setType(SpringView.Type.FOLLOW);
+        refreshHotShow.setGive(SpringView.Give.TOP);
         //开始执行刷新
         refreshHotShow.setListener(new SpringView.OnFreshListener() {
             @Override

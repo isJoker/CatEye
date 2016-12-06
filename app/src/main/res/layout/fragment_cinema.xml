@@ -4,32 +4,63 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout
-        android:id="@+id/swipe"
-        android:background="#dfaafd"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@android:color/holo_red_light"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="北京"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/show_city01"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="影院"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:layout_centerInParent="true"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ciname_serch"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"/>
+
+    </RelativeLayout>
+
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
-            android:background="#FFF"
+       <!-- <com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout
+            android:id="@+id/swipe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:text="22222222222222222222222222222222222222
-                2222222222222222222222222222222222222222222
-                22222222222222222222222222222222222222222
-                22222222222222222222222222222222222222
-                22222222222222222222222222222222222
-                2222222222222222222222222222222222222
-                22222222222222222222222222222222222222222
-                222222222222222222222222222222222222222
-                22222222222222222222222222222222222222222222222222
-                222222222222222222222222222222222222222222222222222222"
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
-        </ScrollView>
+            android:layout_height="match_parent"
+            android:background="#ffffff">-->
 
-    </com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout>
+            <ListView
+                android:id="@+id/listview_ciname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
 
+       <!-- </com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout>
+-->
+        <include layout="@layout/item_ciname_head2" />
+    </FrameLayout>
 
 </LinearLayout>

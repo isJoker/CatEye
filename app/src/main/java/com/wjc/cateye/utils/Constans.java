@@ -72,5 +72,7 @@ public class Constans {
      */
     public static final String DISCOVER_BOOKING="http://piaofang.maoyan.com/?f=android&userid=-1&pushToken=dpshe3234c9ecd8e748e1eeae12b0ac4b78fatpu&cityId=1";
 
+    public static final String CINAME = "http://m.maoyan.com/cinemas.json";
+
 
 }

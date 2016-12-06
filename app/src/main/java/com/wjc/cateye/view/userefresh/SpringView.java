@@ -15,9 +15,6 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ListView;
 import android.widget.OverScroller;
 
-import com.wjc.cateye.R;
-
-
 /**
  * Created by liaoinstan on 2016/3/11.
  */
@@ -84,20 +81,20 @@ public class SpringView extends ViewGroup{
         mScroller = new OverScroller(context);
 
         //获取自定义属性
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SpringView);
-        if (ta.hasValue(R.styleable.SpringView_type)){
-            int type_int = ta.getInt(R.styleable.SpringView_type, 0);
+        TypedArray ta = context.obtainStyledAttributes(attrs, com.liaoinstan.springview.R.styleable.SpringView);
+        if (ta.hasValue(com.liaoinstan.springview.R.styleable.SpringView_type)){
+            int type_int = ta.getInt(com.liaoinstan.springview.R.styleable.SpringView_type, 0);
             type = Type.values()[type_int];
         }
-        if (ta.hasValue(R.styleable.SpringView_give)){
-            int give_int = ta.getInt(R.styleable.SpringView_give, 0);
+        if (ta.hasValue(com.liaoinstan.springview.R.styleable.SpringView_give)){
+            int give_int = ta.getInt(com.liaoinstan.springview.R.styleable.SpringView_give, 0);
             give = Give.values()[give_int];
         }
-        if (ta.hasValue(R.styleable.SpringView_header)){
-            headerResoureId = ta.getResourceId(R.styleable.SpringView_header, 0);
+        if (ta.hasValue(com.liaoinstan.springview.R.styleable.SpringView_header)){
+            headerResoureId = ta.getResourceId(com.liaoinstan.springview.R.styleable.SpringView_header, 0);
         }
-        if (ta.hasValue(R.styleable.SpringView_footer)){
-            footerResoureId = ta.getResourceId(R.styleable.SpringView_footer, 0);
+        if (ta.hasValue(com.liaoinstan.springview.R.styleable.SpringView_footer)){
+            footerResoureId = ta.getResourceId(com.liaoinstan.springview.R.styleable.SpringView_footer, 0);
         }
         ta.recycle();
     }

@@ -47,10 +47,10 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter {
         this.topJson = topJson;
         this.bodyJson = bodyJson;
 
-        processTopData(topJson, bodyJson);
+        bodyList = processTopData(topJson, bodyJson);
     }
 
-    private void processTopData(String topJson, String bodyJson) {
+    private List<FindBodyBean.DataBean.FeedsBean> processTopData(String topJson, String bodyJson) {
         Gson gson = new Gson();
         //得到head数据
         FindTopTitleBean findTopTitleBean = gson.fromJson(topJson, FindTopTitleBean.class);
@@ -58,8 +58,7 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter {
         //得到body数据
         FindBodyBean findBodyBean = gson.fromJson(bodyJson, FindBodyBean.class);
         LogUtil.e("findBodyBean------>" + findBodyBean);
-        bodyList = findBodyBean.getData().getFeeds();
-
+       return findBodyBean.getData().getFeeds();
     }
 
     @Override
@@ -291,5 +290,15 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter {
 
     public void setAdapterListener(FindAdapterListener adapterListener) {
         this.adapterListener = adapterListener;
+    }
+
+    public void refreshData(String topJson, String bodyJson){
+        List<FindBodyBean.DataBean.FeedsBean> list = processTopData(topJson, bodyJson);
+        bodyList.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public int getItemSize(){
+        return bodyList.size() + 1;
     }
 }

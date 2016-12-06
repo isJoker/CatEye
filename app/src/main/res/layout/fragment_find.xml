@@ -2,16 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/holo_green_dark">
+    android:background="@android:color/holo_green_dark"
+    android:orientation="vertical">
 
-    <include layout="@layout/titlebar_home"/>
+    <include layout="@layout/titlebar_home" />
 
-    <com.wjc.cateye.view.userefresh.SpringView
-        android:id="@+id/refresh_find"
+    <com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout
+        android:id="@+id/swipe_find"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="#ffffff">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_find"
@@ -21,8 +21,6 @@
 
         </android.support.v7.widget.RecyclerView>
 
-    </com.wjc.cateye.view.userefresh.SpringView>
-
-
+    </com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout>
 
 </LinearLayout>

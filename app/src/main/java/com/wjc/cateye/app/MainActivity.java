@@ -17,6 +17,7 @@ import com.wjc.cateye.cinema.fragment.CinemaFragment;
 import com.wjc.cateye.find.fragment.FindFragment;
 import com.wjc.cateye.moive.fragment.MoiveFragment;
 import com.wjc.cateye.user.fragment.UserFragment;
+import com.wjc.cateye.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -178,14 +179,10 @@ public class MainActivity extends FragmentActivity {
                 sb.append("\naddr : ");// 地址信息
                 sb.append(location.getAddrStr());
 
-//                LogUtil.e("地址---------------------->" + sb.toString());
+                LogUtil.e("地址---------------------->" + sb.toString());
 
                 //发送EventBus事件
                 EventBus.getDefault().postSticky(new String(location.getCity()));
-
-                //禁掉定位服务
-                locationService.unregisterListener(mListener); //注销掉监听
-                locationService.stop(); //停止定位服务
             }
         }
 

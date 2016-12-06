@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.wjc.cateye.R;
-import com.wjc.cateye.app.MyApplication;
 import com.wjc.cateye.base.BaseFragment;
 import com.wjc.cateye.find.activity.MoiveMsgActivity;
 import com.wjc.cateye.find.activity.TicketActivity;
@@ -14,9 +13,8 @@ import com.wjc.cateye.find.activity.Top10Activity;
 import com.wjc.cateye.find.adapter.FindRecyclerAdapter;
 import com.wjc.cateye.utils.Constans;
 import com.wjc.cateye.utils.LogUtil;
-import com.wjc.cateye.view.userefresh.CatEyeFooter;
-import com.wjc.cateye.view.userefresh.CatEyeHeader;
-import com.wjc.cateye.view.userefresh.SpringView;
+import com.wjc.cateye.view.refresh.CustomProgressDrawable;
+import com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -33,13 +31,19 @@ import static com.wjc.cateye.app.MyApplication.mContext;
 
 public class FindFragment extends BaseFragment {
 
-    @Bind(R.id.refresh_find)
-    SpringView refreshFind;
+    //    @Bind(R.id.refresh_find)
+//    SpringView refreshFind;
     @Bind(R.id.recycler_find)
     RecyclerView recyclerFind;
+    @Bind(R.id.swipe_find)
+    CustomSwipeRefreshLayout swipeFind;
 
     private String topJson;
     private FindRecyclerAdapter recyclerAdapter;
+
+    boolean isRefresh = false;
+    boolean isLoadMore = false;
+    private int offset ;//body每页十条数据
 
     @Override
     protected String getUrl() {
@@ -53,7 +57,7 @@ public class FindFragment extends BaseFragment {
 
         initRefresh();
 
-        getBodyJson();
+        getBodyJson(Constans.FIND_BODY_MSG);
 
     }
 
@@ -82,18 +86,38 @@ public class FindFragment extends BaseFragment {
                 getActivity().startActivity(intent);
             }
         });
+
+        recyclerFind.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastItemPosition = ((LinearLayoutManager) (recyclerView.getLayoutManager())).findLastVisibleItemPosition();
+                if(lastItemPosition == recyclerAdapter.getItemSize() - 1) {
+                    offset += 10;
+                    isLoadMore = true;
+                    getBodyJson(Constans.FIND_BODY_MSG + offset);
+
+                }
+            }
+        });
     }
 
-    private void getBodyJson() {
+    private void getBodyJson(String json) {
 
         OkHttpUtils
                 .get()
-                .url(Constans.FIND_BODY_MSG)
+                .url(json)
                 .build()
                 .execute(new MyStringCallBack());
     }
 
-    class MyStringCallBack  extends StringCallback{
+
+    class MyStringCallBack extends StringCallback {
 
         @Override
         public void onError(Call call, Exception e, int id) {
@@ -103,47 +127,66 @@ public class FindFragment extends BaseFragment {
         @Override
         public void onResponse(String response, int id) {
             LogUtil.e("加载发现页body数据成功--" + response);
+            
+            if(isRefresh || isLoadMore) {//下拉刷新
+                recyclerAdapter.refreshData(topJson,response);//只刷新了底部数据，没有刷新头部
+            } else {//正常加载
+                recyclerAdapter = new FindRecyclerAdapter(mContext, topJson, response);
+                recyclerFind.setLayoutManager(new LinearLayoutManager(mContext));
+                recyclerFind.setAdapter(recyclerAdapter);
 
-            recyclerAdapter = new FindRecyclerAdapter(mContext, topJson, response);
-            recyclerFind.setLayoutManager(new LinearLayoutManager(mContext));
-            recyclerFind.setAdapter(recyclerAdapter);
+                initListener();
+            }
 
-            initListener();
         }
     }
 
     private void initRefresh() {
-        refreshFind.setType(SpringView.Type.FOLLOW);
-        refreshFind.setGive(SpringView.Give.TOP);
-        //开始执行刷新
-        refreshFind.setListener(new SpringView.OnFreshListener() {
+//        refreshFind.setType(SpringView.Type.FOLLOW);
+//        refreshFind.setGive(SpringView.Give.TOP);
+//        //开始执行刷新
+//        refreshFind.setListener(new SpringView.OnFreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                //模拟联网延时
+//                MyApplication.mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        refreshFind.onFinishFreshAndLoad();
+//                    }
+//                }, 2000);
+//
+//            }
+//
+//            @Override
+//            public void onLoadmore() {
+//                refreshFind.callFresh();
+//                //模拟联网延时
+//                MyApplication.mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        refreshFind.onFinishFreshAndLoad();
+//                    }
+//                }, 1000);
+//            }
+//        });
+//
+//        refreshFind.setHeader(new CatEyeHeader(getActivity()));
+//        refreshFind.setFooter(new CatEyeFooter());
+
+        CustomProgressDrawable mprogressview = new CustomProgressDrawable(getActivity(), swipeFind);
+        mprogressview.setProgressResource(getActivity(), R.drawable.loading_progress);
+
+        swipeFind.setProgressView(mprogressview, R.drawable.progress_bg);
+        swipeFind.setOnRefreshListener(new CustomSwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //模拟联网延时
-                MyApplication.mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshFind.onFinishFreshAndLoad();
-                    }
-                }, 2000);
+                swipeFind.setRefreshing(false);
+                isRefresh = true;
+                getBodyJson(Constans.FIND_BODY_MSG);
 
-            }
-
-            @Override
-            public void onLoadmore() {
-                refreshFind.callFresh();
-                //模拟联网延时
-                MyApplication.mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshFind.onFinishFreshAndLoad();
-                    }
-                }, 1000);
             }
         });
-
-        refreshFind.setHeader(new CatEyeHeader(getActivity()));
-        refreshFind.setFooter(new CatEyeFooter());
     }
 
     @Override

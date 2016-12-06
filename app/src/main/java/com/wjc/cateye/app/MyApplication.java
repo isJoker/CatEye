@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Vibrator;
 
 import com.baidu.location.service.LocationService;
+import com.baidu.mapapi.SDKInitializer;
 
 
 /**
@@ -42,7 +43,7 @@ public class MyApplication extends Application {
          */
         locationService = new LocationService(getApplicationContext());
         mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
-//        SDKInitializer.initialize(getApplicationContext());
+        SDKInitializer.initialize(getApplicationContext());
 
     }
 }

@@ -1,23 +1,23 @@
 package com.wjc.cateye.moive.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.wjc.cateye.R;
-import com.wjc.cateye.app.MyApplication;
+import com.wjc.cateye.app.ShowH5Activity;
 import com.wjc.cateye.base.BaseFragment;
 import com.wjc.cateye.moive.adapter.HotListViewAdapter;
 import com.wjc.cateye.moive.bean.HotViewpagerBean;
 import com.wjc.cateye.moive.bean.ListBean;
 import com.wjc.cateye.utils.Constans;
 import com.wjc.cateye.utils.LogUtil;
-import com.wjc.cateye.view.userefresh.CatEyeFooter;
-import com.wjc.cateye.view.userefresh.CatEyeHeader;
-import com.wjc.cateye.view.userefresh.SpringView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -41,8 +41,8 @@ public class HotShowFragment extends BaseFragment {
 
     @Bind(R.id.listview_home_show)
     ListView listviewHomeShow;
-    @Bind(R.id.refresh_hot_show)
-    SpringView refreshHotShow;
+//    @Bind(R.id.refresh_hot_show)
+//    SpringView refreshHotShow;
     private Banner banner;
     private View headerView;
 
@@ -54,7 +54,7 @@ public class HotShowFragment extends BaseFragment {
     @Override
     protected void initData(String content) {
 
-        initRefresh();
+//        initRefresh();
 
         //解析ViewPager数据
         processData(content);
@@ -62,41 +62,41 @@ public class HotShowFragment extends BaseFragment {
         getListViewDataForNet();
     }
 
-    private void initRefresh() {
-        refreshHotShow.setType(SpringView.Type.FOLLOW);
-        refreshHotShow.setGive(SpringView.Give.TOP);
-        //开始执行刷新
-        refreshHotShow.setListener(new SpringView.OnFreshListener() {
-            @Override
-            public void onRefresh() {
-
-                //模拟联网延时
-                MyApplication.mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshHotShow.onFinishFreshAndLoad();
-                    }
-                },2000);
-
-            }
-
-            @Override
-            public void onLoadmore() {
-                refreshHotShow.callFresh();
-
-                //模拟联网延时
-                MyApplication.mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshHotShow.onFinishFreshAndLoad();
-                    }
-                },1000);
-            }
-        });
-
-        refreshHotShow.setHeader(new CatEyeHeader(getActivity()));
-        refreshHotShow.setFooter(new CatEyeFooter());
-    }
+//    private void initRefresh() {
+//        refreshHotShow.setType(SpringView.Type.FOLLOW);
+//        refreshHotShow.setGive(SpringView.Give.TOP);
+//        //开始执行刷新
+//        refreshHotShow.setListener(new SpringView.OnFreshListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//                //模拟联网延时
+//                MyApplication.mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        refreshHotShow.onFinishFreshAndLoad();
+//                    }
+//                },2000);
+//
+//            }
+//
+//            @Override
+//            public void onLoadmore() {
+//                refreshHotShow.callFresh();
+//
+//                //模拟联网延时
+//                MyApplication.mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        refreshHotShow.onFinishFreshAndLoad();
+//                    }
+//                },1000);
+//            }
+//        });
+//
+//        refreshHotShow.setHeader(new CatEyeHeader(getActivity()));
+//        refreshHotShow.setFooter(new CatEyeFooter());
+//    }
 
     private void getListViewDataForNet() {
         OkHttpUtils
@@ -112,7 +112,7 @@ public class HotShowFragment extends BaseFragment {
         @Override
         public void onError(Call call, Exception e, int id) {
             LogUtil.e("请求热映页ListView失败" + e.getMessage());
-
+            Toast.makeText(getActivity(), "联网失败，请检查网络连接", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -126,11 +126,25 @@ public class HotShowFragment extends BaseFragment {
 
     private void processListViewData(String response) {
         ListBean listBean = new Gson().fromJson(response, ListBean.class);
-        List<ListBean.DataBean.MoviesBean> movies = listBean.getData().getMovies();
+        final List<ListBean.DataBean.MoviesBean> movies = listBean.getData().getMovies();
         //给ListView添加头布局
         listviewHomeShow.addHeaderView(headerView);
 
         listviewHomeShow.setAdapter(new HotListViewAdapter(movies, getActivity()));
+
+        listviewHomeShow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    int moive_id = movies.get(position - 1).getId();
+                    Intent intent = new Intent(getActivity(), ShowH5Activity.class);
+                    intent.putExtra("h5_url", "http://maoyan.com/s/movie/" + moive_id);
+                    startActivity(intent);
+                }catch (Exception e){
+                    Toast.makeText(getActivity(), "网络异常~请稍后再试", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
 

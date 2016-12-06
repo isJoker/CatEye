@@ -100,18 +100,15 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         int style = 0;
-        if (position > 0) {
-            style = bodyList.get(position - 1).getStyle();
-        }
-
         if (position == TYPE_TOP) {
             currentType = TYPE_TOP;
         } else {
+            style = bodyList.get(position - 1).getStyle();
             if (style == 3 || style == 4) {
                 currentType = TYPE_1;
             } else if (style == 7) {
                 currentType = TYPE_2;
-            } else if (style == 2) {
+            } else if (style == 2 || style == 5) {
                 currentType = TYPE_NOMAL;
             }
         }
@@ -256,6 +253,8 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter {
         TextView tvDisplayCount3;
         @Bind(R.id.tv_comment_count3)
         TextView tvCommentCount3;
+        @Bind(R.id.img_discover3)
+        ImageView imgDiscover3;
 
         public Type3ViewHolder(View itemView) {
             super(itemView);
@@ -263,6 +262,7 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(FindBodyBean.DataBean.FeedsBean data) {
+            Glide.with(mContext).load(data.getImages().get(0).getUrl()).into(imgDiscover3);
             if (data.getStyle() == 2) {
                 tvTitle3.setText(data.getTitle());
                 if (data.getUser() != null) {

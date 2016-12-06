@@ -366,7 +366,7 @@
                     android:layout_marginRight="10dp"
                     android:drawablePadding="5dp"
                     android:drawableRight="@drawable/right_gray"
-                    android:text="0.00元"
+                    android:text="80008.00元"
                     android:textSize="15sp" />
             </LinearLayout>
 

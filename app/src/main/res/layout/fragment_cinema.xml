@@ -46,11 +46,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-       <!-- <com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout
+       <com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout
             android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff">-->
+            android:background="#ffffff">
 
             <ListView
                 android:id="@+id/listview_ciname"
@@ -58,8 +58,7 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="none" />
 
-       <!-- </com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout>
--->
+        </com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout>
         <include layout="@layout/item_ciname_head2" />
     </FrameLayout>
 

@@ -25,7 +25,8 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:src="@drawable/find_image_small"/>
+            android:src="@drawable/find_image_small"
+            android:scaleType="fitXY"/>
 
         <ImageView
             android:id="@+id/image2"
@@ -33,7 +34,8 @@
             android:layout_height="100dp"
             android:layout_weight="1"
             android:src="@drawable/find_image_small"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"/>
 
         <ImageView
             android:id="@+id/image3"
@@ -42,7 +44,7 @@
             android:layout_weight="1"
             android:src="@drawable/find_image_small"
             android:layout_marginLeft="10dp"
-            />
+            android:scaleType="fitXY"/>
 
     </LinearLayout>
 

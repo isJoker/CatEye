@@ -9,11 +9,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.wjc.cateye.R;
 import com.wjc.cateye.moive.bean.ListBean;
-import com.wjc.cateye.utils.LogUtil;
 
 import java.util.List;
 
@@ -63,8 +63,7 @@ public class HotListViewAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        ListBean.DataBean.MoviesBean bean = beanList.get(position);
-        LogUtil.e("position------>" + position);
+        final ListBean.DataBean.MoviesBean bean = beanList.get(position);
 
         Glide.with(mContext).load(bean.getImg()).into(viewHolder.imgPoster);
         viewHolder.tvTitle.setText(bean.getNm());
@@ -81,24 +80,45 @@ public class HotListViewAdapter extends BaseAdapter {
             viewHolder.btnBuyTicket.setTextColor(Color.RED);
             viewHolder.btnBuyTicket.setBackgroundResource(R.drawable.btn_buy_gb);
         }
+        viewHolder.btnBuyTicket.setVisibility(View.VISIBLE);
+        viewHolder.btnPresell.setVisibility(View.GONE);
+        viewHolder.btnBuyPress.setVisibility(View.GONE);
 
         if (position != 0) {//隐藏底部专题蓝
             viewHolder.llBottomTopic.setVisibility(View.GONE);
         } else {
             viewHolder.llBottomTopic.setVisibility(View.VISIBLE);
         }
-        
-        if(bean.isValue3d()) {
+
+        if (bean.isValue3d()) {
             viewHolder.tv3d.setVisibility(View.VISIBLE);
         } else {
             viewHolder.tv3d.setVisibility(View.GONE);
         }
 
-        if(bean.isImax()) {
+        if (bean.isImax()) {
             viewHolder.tvImax.setVisibility(View.VISIBLE);
         } else {
             viewHolder.tvImax.setVisibility(View.GONE);
         }
+
+        final ViewHolder finalViewHolder = viewHolder;
+        viewHolder.btnBuyTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bean.getPreSale() == 1) {
+                    finalViewHolder.btnBuyTicket.setVisibility(View.GONE);
+                    finalViewHolder.btnPresell.setVisibility(View.VISIBLE);
+                    finalViewHolder.btnBuyPress.setVisibility(View.GONE);
+                    Toast.makeText(mContext, "预售", Toast.LENGTH_SHORT).show();
+                } else {
+                    finalViewHolder.btnBuyTicket.setVisibility(View.VISIBLE);
+                    finalViewHolder.btnPresell.setVisibility(View.GONE);
+                    finalViewHolder.btnBuyPress.setVisibility(View.VISIBLE);
+                    Toast.makeText(mContext, "购票", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         return convertView;
     }
@@ -123,6 +143,10 @@ public class HotListViewAdapter extends BaseAdapter {
         TextView tvShowInfo;
         @Bind(R.id.btn_buy_ticket)
         Button btnBuyTicket;
+        @Bind(R.id.btn_presell)
+        Button btnPresell;
+        @Bind(R.id.btn_buy_press)
+        Button btnBuyPress;
         @Bind(R.id.ll_topic1)
         LinearLayout llTopic1;
         @Bind(R.id.ll_topic2)
@@ -133,18 +157,6 @@ public class HotListViewAdapter extends BaseAdapter {
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
-            imgPlayMoive = (ImageView) view.findViewById(R.id.img_play_moive);
-            btnBuyTicket = (Button) view.findViewById(R.id.btn_buy_ticket);
-            llTopic1 = (LinearLayout) view.findViewById(R.id.ll_topic1);
-            llTopic2 = (LinearLayout) view.findViewById(R.id.ll_topic2);
-            tvTitle = (TextView) view.findViewById(R.id.tv_title);
-            tvAudienceGrade = (TextView) view.findViewById(R.id.tv_audience_grade);
-            tvScm = (TextView) view.findViewById(R.id.tv_scm);
-            tvShowInfo = (TextView) view.findViewById(R.id.tv_show_info);
-            imgPoster = (ImageView) view.findViewById(R.id.img_poster);
-            llBottomTopic = (LinearLayout) view.findViewById(R.id.ll_bottom_topic);
-            tv3d = (TextView) view.findViewById(R.id.tv_3d);
-            tvImax = (TextView) view.findViewById(R.id.tv_imax);
         }
     }
 

@@ -57,8 +57,7 @@
             android:name=".moive.selectcity.activity.SelectCityActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity
-            android:name=".user.activity.LoginActivity"/>
+        <activity android:name=".user.activity.LoginActivity" />
         <activity
             android:name=".find.activity.Top10Activity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
@@ -67,6 +66,8 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".find.activity.TicketActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity android:name=".app.ShowH5Activity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- 集成百度地图定位 -->

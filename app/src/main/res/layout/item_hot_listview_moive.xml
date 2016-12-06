@@ -134,15 +134,48 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_buy_ticket"
+        <FrameLayout
             android:layout_width="60dp"
             android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:text="购票"
-            android:textSize="12sp"
-            android:textColor="@android:color/holo_red_light"
-            android:background="@drawable/btn_buy_gb"/>
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/btn_buy_ticket"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="购票"
+                android:textSize="12sp"
+                android:focusable="false"
+                android:textColor="@android:color/holo_red_light"
+                android:background="@drawable/btn_buy_gb"/>
+            <Button
+                android:id="@+id/btn_buy_press"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="购票"
+                android:textSize="12sp"
+                android:focusable="false"
+                android:textColor="@android:color/white"
+                android:background="@android:color/holo_red_light"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/btn_presell"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="预售"
+                android:textSize="12sp"
+                android:focusable="false"
+                android:textColor="@android:color/white"
+                android:background="@android:color/holo_blue_light"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+
 
     </LinearLayout>
 

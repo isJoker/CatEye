@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:background="#ffffff"
+            android:background="#f8f9f9"
             android:hint="仅支持中国大陆手机号"
             android:textSize="18sp" />
 
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:background="#ffffff"
+            android:background="#f8f9f9"
             android:hint="请输入验证码"
             android:inputType="textPassword"
             android:textSize="18sp" />

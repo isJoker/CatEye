@@ -155,6 +155,34 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter {
             Glide.with(mContext).load(topTitleList.get(3).getImage().getUrl()).into(ticket);
             ticketTitle.setText(topTitleList.get(3).getTitle());
 
+            top10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    adapterListener.onTOP10Click();
+                }
+            });
+
+            moiveMsg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    adapterListener.onMoiveMsgClick();
+                }
+            });
+
+            shoppingMall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    adapterListener.onShoppingMallClick();
+                }
+            });
+
+            ticket.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    adapterListener.onTicket();
+                }
+            });
+
         }
     }
 
@@ -237,15 +265,31 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter {
         public void setData(FindBodyBean.DataBean.FeedsBean data) {
             if (data.getStyle() == 2) {
                 tvTitle3.setText(data.getTitle());
-                if(data.getUser() != null) {
+                if (data.getUser() != null) {
                     tvWhere2.setText(data.getUser().getNickName());
                 } else {
                     tvWhere2.setVisibility(View.INVISIBLE);
                 }
-                tvCommentCount3.setText(data.getCommentCount()+"");
-                tvDisplayCount3.setText(data.getViewCount()+"");
+                tvCommentCount3.setText(data.getCommentCount() + "");
+                tvDisplayCount3.setText(data.getViewCount() + "");
             }
         }
     }
 
+    public interface FindAdapterListener {
+
+        void onTOP10Click();
+
+        void onMoiveMsgClick();
+
+        void onShoppingMallClick();
+
+        void onTicket();
+    }
+
+    private FindAdapterListener adapterListener;
+
+    public void setAdapterListener(FindAdapterListener adapterListener) {
+        this.adapterListener = adapterListener;
+    }
 }

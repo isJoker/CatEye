@@ -57,7 +57,17 @@
             android:name=".moive.selectcity.activity.SelectCityActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".user.activity.LoginActivity"/>
+        <activity
+            android:name=".user.activity.LoginActivity"/>
+        <activity
+            android:name=".find.activity.Top10Activity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".find.activity.MoiveMsgActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".find.activity.TicketActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- 集成百度地图定位 -->
         <meta-data
@@ -69,9 +79,10 @@
             android:enabled="true"
             android:process=":remote">
             <intent-filter>
-                <action android:name="com.baidu.location.service_v2.2"></action>
+                <action android:name="com.baidu.location.service_v2.2" />
             </intent-filter>
         </service>
+
 
     </application>
 

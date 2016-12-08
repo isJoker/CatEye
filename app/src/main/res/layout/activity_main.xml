@@ -12,39 +12,53 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <RadioGroup
-        android:id="@+id/rg_main"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#f4f4f4"
-        android:orientation="horizontal"
-        android:padding="1dp">
+        android:layout_height="55dp">
 
-        <RadioButton
-            android:id="@+id/rb_movie"
-            style="@style/MainButtonStyle"
-            android:drawableTop="@drawable/movie_button_selector"
-            android:text="电影" />
 
-        <RadioButton
-            android:id="@+id/rb_cinema"
-            style="@style/MainButtonStyle"
-            android:drawableTop="@drawable/cinema_button_selector"
-            android:text="影院" />
 
-        <RadioButton
-            android:id="@+id/rb_find"
-            style="@style/MainButtonStyle"
-            android:drawableTop="@drawable/find_button_selector"
-            android:paddingTop="10dp"
-            android:text="发现" />
+        <RadioGroup
+            android:id="@+id/rg_main"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:background="#f4f4f4"
+            android:orientation="horizontal"
+            android:padding="1dp">
 
-        <RadioButton
-            android:id="@+id/rb_user"
-            style="@style/MainButtonStyle"
-            android:drawableTop="@drawable/user_button_selector"
-            android:text="我的" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/rb_movie"
+                style="@style/MainButtonStyle"
+                android:drawableTop="@drawable/movie_button_selector"
+                android:text="电影" />
 
+            <RadioButton
+                android:id="@+id/rb_cinema"
+                style="@style/MainButtonStyle"
+                android:drawableTop="@drawable/cinema_button_selector"
+                android:text="影院" />
+
+            <RadioButton
+                android:id="@+id/rb_find"
+                style="@style/MainButtonStyle"
+                android:drawableTop="@drawable/find_button_selector"
+                android:paddingTop="10dp"
+                android:text="发现" />
+
+            <RadioButton
+                android:id="@+id/rb_user"
+                style="@style/MainButtonStyle"
+                android:drawableTop="@drawable/user_button_selector"
+                android:text="我的" />
+        </RadioGroup>
+
+        <View
+            android:id="@+id/view_transparent_main"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="#96333333"
+            android:visibility="gone"/>
+
+    </FrameLayout>
 </LinearLayout>

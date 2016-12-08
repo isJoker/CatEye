@@ -7,37 +7,37 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
         android:background="@android:color/holo_red_light"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="北京"
-            android:textSize="15sp"
-            android:textColor="@android:color/white"
-            android:gravity="center_vertical"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
             android:drawablePadding="5dp"
-            android:drawableRight="@drawable/show_city01"/>
+            android:drawableRight="@drawable/show_city01"
+            android:gravity="center_vertical"
+            android:text="北京"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="影院"
             android:textColor="@android:color/white"
-            android:textSize="22sp"
-            android:layout_centerInParent="true"/>
+            android:textSize="22sp" />
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/ciname_serch"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ciname_serch" />
 
     </RelativeLayout>
 
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-       <com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout
+        <com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout
             android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -59,38 +59,47 @@
                 android:scrollbars="none" />
 
         </com.wjc.cateye.view.refresh.CustomSwipeRefreshLayout>
+
         <include layout="@layout/item_ciname_head2" />
 
         <LinearLayout
             android:id="@+id/ll_addr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_alignParentBottom="true"
-            android:padding="8dp"
             android:layout_marginBottom="10dp"
-            android:background="#ededed"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp"
+            android:background="#ededed"
+            android:gravity="center_vertical"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/tv_addr"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="北京昌平区大柳树幼儿园(北清路)"
-                android:textSize="12sp"
-                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:drawableLeft="@drawable/locate"
-                android:layout_marginLeft="10dp"/>
+                android:gravity="center_vertical"
+                android:text="北京昌平区大柳树幼儿园(北清路)"
+                android:textSize="12sp" />
 
             <ImageView
                 android:id="@+id/refresh_addr_ciname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/refresh_cinema"/>
+                android:src="@drawable/refresh_cinema" />
 
         </LinearLayout>
+
+        <View
+            android:id="@+id/view_transparent_cinema"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#96333333"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

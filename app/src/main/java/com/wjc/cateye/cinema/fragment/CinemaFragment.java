@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -85,6 +86,9 @@ public class CinemaFragment extends BaseFragment implements View.OnClickListener
 
     private String json;
     private View head2;
+    private View head1;
+    private View transparentViewMain;
+    private View transparentViewciema;
 
     @Override
     protected String getUrl() {
@@ -98,11 +102,12 @@ public class CinemaFragment extends BaseFragment implements View.OnClickListener
 
         initRefresh();
 
+        head1 = View.inflate(getActivity(), R.layout.item_ciname_head1, null);
         head2 = View.inflate(getActivity(), R.layout.item_ciname_head2, null);
         //初始化head2
         initView(head2);
         //添加两个头
-        listviewCiname.addHeaderView(View.inflate(getActivity(), R.layout.item_ciname_head1, null));
+        listviewCiname.addHeaderView(head1);
         listviewCiname.addHeaderView(head2);
 
         listviewCiname.setAdapter(new ListViewCinameAdapter(content, getActivity()));
@@ -157,6 +162,14 @@ public class CinemaFragment extends BaseFragment implements View.OnClickListener
         llNearest.setOnClickListener(this);
         llBrand.setOnClickListener(this);
         llService.setOnClickListener(this);
+
+        //弹出PopupWindow时用来遮挡的透明的View
+        //下面的代码没效果
+//        transparentViewMain = View.inflate(getActivity(), R.layout.activity_main, null).findViewById(R.id.view_transparent_main);
+//        transparentViewciema = View.inflate(getActivity(), R.layout.fragment_cinema, null).findViewById(R.id.view_transparent_cinema);
+        //用这
+        transparentViewMain = getActivity().findViewById(R.id.view_transparent_main);
+        transparentViewciema = getActivity().findViewById(R.id.view_transparent_cinema);
     }
 
     @Override
@@ -250,7 +263,7 @@ public class CinemaFragment extends BaseFragment implements View.OnClickListener
 
     int rowCount;
     String[] features = new String[]{"全部", "小吃", "可改签", "可退票", "会员卡"};
-    String[] specials = new String[]{"全部", "60帧厅", "Real厅", "IMAX厅", "全景厅", "4K厅", "4DX厅",  "4D厅", "3D厅","巨幕厅"};
+    String[] specials = new String[]{"全部", "60帧厅", "Real厅", "IMAX厅", "全景厅", "4K厅", "4DX厅", "4D厅", "3D厅", "巨幕厅"};
     private RecyclerView recycler_service;
     private TextView btn_reset;
     private TextView btn_complete;
@@ -274,7 +287,7 @@ public class CinemaFragment extends BaseFragment implements View.OnClickListener
             @Override
             public int getSpanSize(int position) {
                 rowCount = features.length + 1;
-                if (position == 0 || position == rowCount || position == rowCount - 1 ) {
+                if (position == 0 || position == rowCount || position == rowCount - 1) {
                     return 4;
                 } else {
                     return 1;
@@ -286,10 +299,12 @@ public class CinemaFragment extends BaseFragment implements View.OnClickListener
         recycler_service.setAdapter(recyclerDataAdapter);
 
         serviceWindow.showAsDropDown(head2);
+        showTransparentView();
         serviceWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 dismissPopWindow(serviceWindow);
+                hideTransparentView();
             }
         });
 
@@ -308,7 +323,7 @@ public class CinemaFragment extends BaseFragment implements View.OnClickListener
     }
 
     private ListView lv_brand;
-    private String[] cinema = new String[]{"全部","大地影院", "保利国际影城", "耀莱成龙国际影城", "博纳国际影城", "星美国际影城", "百脑汇影城",
+    private String[] cinema = new String[]{"全部", "大地影院", "保利国际影城", "耀莱成龙国际影城", "博纳国际影城", "星美国际影城", "百脑汇影城",
             "17.5影城", "CGV影城", "橙天嘉禾影城", "金逸影院", "中影国际影城", "万达影城",
             "新华国际影城", "首都电影院", "UME国际影城", "幸福蓝海国际影城", "卢米埃影城", "华谊兄弟影城", "17.5影城", "CGV影城", "橙天嘉禾影城", "金逸影院", "中影国际影城", "万达影城",
             "新华国际影城", "首都电影院", "UME国际影城", "幸福蓝海国际影城", "卢米埃影城", "华谊兄弟影城"};
@@ -328,10 +343,12 @@ public class CinemaFragment extends BaseFragment implements View.OnClickListener
         lv_brand.setAdapter(new ListViewDataAdapter(mContext, cinema));
 
         brandWindow.showAsDropDown(head2);
+        showTransparentView();
         brandWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 dismissPopWindow(brandWindow);
+                hideTransparentView();
             }
         });
 
@@ -359,10 +376,12 @@ public class CinemaFragment extends BaseFragment implements View.OnClickListener
         // 设置popWindow的显示和消失动画
         nearstWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
         nearstWindow.showAsDropDown(head2);
+        showTransparentView();
         nearstWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 dismissPopWindow(nearstWindow);
+                hideTransparentView();
             }
         });
 
@@ -489,12 +508,34 @@ public class CinemaFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void onDismiss() {
                 dismissPopWindow(addrWindow);
+                hideTransparentView();
             }
         });
 
         // 5 在底部显示
         addrWindow.showAsDropDown(head2);
+        showTransparentView();
+    }
 
+//    显示蒙层效果
+    private void showTransparentView() {
+        int[] location = new int[2];
+        head2.getLocationOnScreen(location);
+        int head2Y = location[1];
+        //transparentViewciema蒙层的高度，50dp为影院标题的高度
+        int viewciemaHeight =  (getActivity().getResources().getDisplayMetrics()
+                        .heightPixels - head2Y - head2.getMeasuredHeight() - getActivity().findViewById(R.id.rg_main).getMeasuredHeight());
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) transparentViewciema.getLayoutParams();
+        layoutParams.height = viewciemaHeight;
+        transparentViewciema.setLayoutParams(layoutParams);
+        transparentViewciema.setVisibility(View.VISIBLE);
+        transparentViewMain.setVisibility(View.VISIBLE);
+    }
+
+    //隐藏蒙层效果
+    private void hideTransparentView(){
+        transparentViewciema.setVisibility(View.GONE);
+        transparentViewMain.setVisibility(View.GONE);
     }
 
     private void dismissPopWindow(PopupWindow addrWindow) {

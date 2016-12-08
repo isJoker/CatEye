@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.wjc.cateye.R;
@@ -46,6 +47,7 @@ public abstract class LoadingPage extends FrameLayout {
 
     private Context mContext;
     private ViewGroup.LayoutParams params;
+    private Button btn_refresh_loading;
 
     public LoadingPage(Context context) {
         this(context, null);
@@ -72,11 +74,19 @@ public abstract class LoadingPage extends FrameLayout {
             //添加到当前的LoadingPage
             addView(loadingView, params);
 
-
         }
 
         if (errorView == null) {
             errorView = UIUtils.getXmlView(R.layout.page_error);
+            btn_refresh_loading = (Button) errorView.findViewById(R.id.btn_refresh_loading);
+            btn_refresh_loading.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    loadingView.setVisibility(VISIBLE);
+                    errorView.setVisibility(GONE);
+                    show();
+                }
+            });
             //添加到当前的LoadingPage
             addView(errorView, params);
         }

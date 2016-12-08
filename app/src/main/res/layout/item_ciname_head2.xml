@@ -3,63 +3,92 @@
     android:id="@+id/item_hover_head"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp"
-        android:gravity="center">
+        android:padding="5dp">
 
         <LinearLayout
+            android:id="@+id/ll_addr_cinema"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="10dp">
 
             <TextView
+                android:id="@+id/tv_addr_cinema"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="区域"
-                android:textSize="12sp"
-                android:gravity="center"/>
+                android:textSize="12sp" />
 
-            <ImageView
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ciname2" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img_down_addr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cinema2" />
+                <ImageView
+                    android:id="@+id/img_up_addr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cinema3"
+                    android:visibility="gone"/>
+            </FrameLayout>
+
 
         </LinearLayout>
-        
+
         <View
             android:layout_width="1dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:background="#44787878"/>
+            android:background="#44787878" />
 
         <LinearLayout
+            android:id="@+id/ll_nearest"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="10dp">
 
             <TextView
+                android:id="@+id/tv_nearest"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="离我最近"
-                android:textSize="12sp"
-                android:gravity="center"/>
+                android:textSize="12sp" />
 
-            <ImageView
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ciname2" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img_down_nearest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cinema2" />
+                <ImageView
+                    android:id="@+id/img_up_nearest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cinema3"
+                    android:visibility="gone"/>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -67,27 +96,41 @@
             android:layout_width="1dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:background="#44787878"/>
+            android:background="#44787878" />
 
         <LinearLayout
+            android:id="@+id/ll_brand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="10dp">
 
             <TextView
+                android:id="@+id/tv_brand"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="品牌"
-                android:textSize="12sp"
-                android:gravity="center"/>
+                android:textSize="12sp" />
 
-            <ImageView
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ciname2" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img_down_brand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cinema2" />
+                <ImageView
+                    android:id="@+id/img_up_brand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cinema3"
+                    android:visibility="gone"/>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -95,27 +138,41 @@
             android:layout_width="1dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:background="#44787878"/>
+            android:background="#44787878" />
 
         <LinearLayout
+            android:id="@+id/ll_service"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="10dp">
 
             <TextView
+                android:id="@+id/tv_service"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="特效/服务"
-                android:textSize="12sp"
-                android:gravity="center"/>
+                android:textSize="12sp" />
 
-            <ImageView
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ciname2" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img_down_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cinema2" />
+                <ImageView
+                    android:id="@+id/img_up_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cinema3"
+                    android:visibility="gone"/>
+            </FrameLayout>
 
         </LinearLayout>
     </LinearLayout>
@@ -123,6 +180,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#448e8e8e"/>
+        android:background="#448e8e8e" />
 
 </LinearLayout>

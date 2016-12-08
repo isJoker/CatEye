@@ -3,6 +3,7 @@ package com.wjc.cateye.moive.fragment;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.flyco.tablayout.SlidingTabLayout;
@@ -18,6 +19,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_OK;
@@ -36,6 +38,8 @@ public class MoiveFragment extends BaseFragment {
     TextView btnSelectCity;
     @Bind(R.id.tl_sliding_tab)
     SlidingTabLayout tlSlidingTab;
+    @Bind(R.id.img_search_movie)
+    ImageView imgSearchMovie;
 
     private ArrayList<Fragment> fragments;
     private CharSequence sequence;//当前城市
@@ -56,29 +60,32 @@ public class MoiveFragment extends BaseFragment {
         tlSlidingTab.setViewPager(viewpagerHome, titles, getActivity(), fragments);
     }
 
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
-    void changeCity(String str){
-        sequence = str.subSequence(0, str.length() - 1);
-        btnSelectCity.setText(sequence);
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    void changeCity(String str) {
+        if(str != null) {
+            sequence = str.subSequence(0, str.length() - 1);
+            LogUtil.e("sequence---------->" + sequence);
+            btnSelectCity.setText(sequence);
+        }
     }
 
     @Override
     public int getLayoutId() {
         return R.layout.fragment_moive;
     }
-    
+
     @OnClick(R.id.btn_select_city)
-    void selectCity(){
+    void selectCity() {
         //进入选择城市界面
         Intent intent = new Intent(getActivity(), SelectCityActivity.class);
-        intent.putExtra("current_city",sequence);
-        startActivityForResult(intent,0);
+        intent.putExtra("current_city", sequence);
+        startActivityForResult(intent, 0);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 0 && resultCode == RESULT_OK) {
+        if (requestCode == 0 && resultCode == RESULT_OK) {
             String city = data.getStringExtra("city");
             LogUtil.e("city==========>" + city);
             btnSelectCity.setText(city);
@@ -95,8 +102,8 @@ public class MoiveFragment extends BaseFragment {
     }
 
     @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

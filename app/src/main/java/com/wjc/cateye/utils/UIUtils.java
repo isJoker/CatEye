@@ -1,8 +1,10 @@
 package com.wjc.cateye.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.wjc.cateye.app.MyApplication;
@@ -105,6 +107,17 @@ public class UIUtils {
     //显示Toast
     public static void toast(String message,boolean isLongShow){
         Toast.makeText(UIUtils.getContext(),message, isLongShow == true? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 设置添加屏幕的背景透明度  1,：全透明；0.5：半透明  0~1，取自己想到的透明度
+     * @param bgAlpha
+     */
+    public static void backgroundAlpha(Activity activity,float bgAlpha)
+    {
+        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        activity.getWindow().setAttributes(lp);
     }
 
 }

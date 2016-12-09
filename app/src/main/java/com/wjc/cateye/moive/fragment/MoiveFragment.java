@@ -11,6 +11,7 @@ import com.wjc.cateye.R;
 import com.wjc.cateye.base.BaseFragment;
 import com.wjc.cateye.moive.selectcity.activity.SelectCityActivity;
 import com.wjc.cateye.utils.LogUtil;
+import com.wjc.cateye.utils.UIUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -62,11 +63,25 @@ public class MoiveFragment extends BaseFragment {
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     void changeCity(String str) {
-        if(str != null) {
+        if (str != null) {
             sequence = str.subSequence(0, str.length() - 1);
-            LogUtil.e("sequence---------->" + sequence);
             btnSelectCity.setText(sequence);
         }
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    void moiveSearch(Integer scroll) {
+        int myScroll = scroll;
+
+        int searchTitleBarHeight = UIUtils.dp2Px(50);
+        if (myScroll > searchTitleBarHeight) {
+            myScroll = searchTitleBarHeight;
+        }
+        float delta = myScroll / (float) searchTitleBarHeight * UIUtils.dp2Px(60);
+        LogUtil.e("delta-------->" + delta);
+        imgSearchMovie.setTranslationX(-delta);
+        imgSearchMovie.setAlpha(delta/(float)UIUtils.dp2Px(60));
+
     }
 
     @Override

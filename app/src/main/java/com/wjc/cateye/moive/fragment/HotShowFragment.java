@@ -3,12 +3,14 @@ package com.wjc.cateye.moive.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.google.gson.Gson;
 import com.wjc.cateye.R;
 import com.wjc.cateye.app.ShowH5Activity;
@@ -24,6 +26,8 @@ import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +45,7 @@ public class HotShowFragment extends BaseFragment {
 
     @Bind(R.id.listview_home_show)
     ListView listviewHomeShow;
-//    @Bind(R.id.refresh_hot_show)
+    //    @Bind(R.id.refresh_hot_show)
 //    SpringView refreshHotShow;
     private Banner banner;
     private View headerView;
@@ -140,12 +144,52 @@ public class HotShowFragment extends BaseFragment {
                     Intent intent = new Intent(getActivity(), ShowH5Activity.class);
                     intent.putExtra("h5_url", "http://maoyan.com/s/movie/" + moive_id);
                     startActivity(intent);
-                }catch (Exception e){
+                } catch (Exception e) {
                     Toast.makeText(getActivity(), "网络异常~请稍后再试", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+        listviewHomeShow.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            /**
+             * 只要注册了监听后就会一直调用
+             * @param view
+             * @param firstVisibleItem
+             * @param visibleItemCount
+             * @param totalItemCount
+             */
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int scrollY = getListViewScorllY();
+                SlidingTabLayout slidingTab = (SlidingTabLayout) getActivity().findViewById(R.id.tl_sliding_tab);
+                if(slidingTab.getCurrentTab() == 0) {
+                    EventBus.getDefault().postSticky(new Integer(scrollY));
+                } /*else if(slidingTab.getCurrentTab() == 1) {//进入到待映页
+                    //把自己的滑动距离存储到sp中
+                    PreferenceUtils.putInt(mContext,"hot_fragment",scrollY);
+                    //从sp中取出保存的待映页的滑动记录，发布事件去MoiveFragment更新搜索框的状态，另外两个Fragment中类似
+                    EventBus.getDefault().postSticky(new Integer(PreferenceUtils.getInt(mContext,"will_show_fragment",0)));
+                }*/
+            }
+        });
+
+    }
+
+    //得到listView的滑动距离
+    private int getListViewScorllY() {
+        View view = listviewHomeShow.getChildAt(0);
+        if (view == null) {
+            return 0;
+        }
+        int firstVisiblePosition = listviewHomeShow.getFirstVisiblePosition();
+        int top = view.getTop();
+        return -top + firstVisiblePosition * view.getHeight();
     }
 
     @Override

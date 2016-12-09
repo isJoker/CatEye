@@ -35,7 +35,7 @@
 
 
     <com.flyco.tablayout.SlidingTabLayout
-        android:id="@+id/tl_sliding_tab"
+        android:id="@+id/tl_sliding_tab_login"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"

@@ -5,12 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.flyco.tablayout.SlidingTabLayout;
 import com.google.gson.Gson;
 import com.wjc.cateye.R;
 import com.wjc.cateye.base.BaseFragment;
 import com.wjc.cateye.moive.adapter.WillShowRecyclerAdapter;
 import com.wjc.cateye.moive.bean.WillShowListBean;
 import com.wjc.cateye.utils.Constans;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -25,7 +28,6 @@ import static com.wjc.cateye.app.MyApplication.mContext;
  */
 
 public class WillShowFragment extends BaseFragment {
-
 
     @Bind(R.id.rv_fragment)
     RecyclerView rvFragment;
@@ -107,11 +109,26 @@ public class WillShowFragment extends BaseFragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+
+                int scrollY = getScollYDistance();
+//                PreferenceUtils.putInt(mContext,"will_show_fragment",scrollY);
+                SlidingTabLayout slidingTab = (SlidingTabLayout) getActivity().findViewById(R.id.tl_sliding_tab);
+                if(slidingTab.getCurrentTab() == 1) {
+                    EventBus.getDefault().postSticky(new Integer(scrollY));
+
+                } /*else if (slidingTab.getCurrentTab() == 0) {
+
+                    EventBus.getDefault().postSticky(new Integer(PreferenceUtils.getInt(mContext, "hot_fragment", 0)));
+                } else if (slidingTab.getCurrentTab() == 2) {
+                    EventBus.getDefault().postSticky(new Integer(PreferenceUtils.getInt(mContext, "find_moive_fragment", 0)));
+                }*/
+
                 //得到第一个可见的位置
                 int firstVisibleItemPosition = ((LinearLayoutManager) (recyclerView.getLayoutManager())).findFirstVisibleItemPosition();
 
@@ -158,6 +175,19 @@ public class WillShowFragment extends BaseFragment {
     @Override
     public int getLayoutId() {
         return R.layout.fragment_will_show;
+    }
+
+
+    /**
+     * 精确的获取RecyclerView在Y轴的移动距离
+     * @return
+     */
+    public int getScollYDistance() {
+        LinearLayoutManager layoutManager = (LinearLayoutManager) rvFragment.getLayoutManager();
+        int position = layoutManager.findFirstVisibleItemPosition();
+        View firstVisiableChildView = layoutManager.findViewByPosition(position);
+        int itemHeight = firstVisiableChildView.getHeight();
+        return (position) * itemHeight - firstVisiableChildView.getTop();
     }
 
 }

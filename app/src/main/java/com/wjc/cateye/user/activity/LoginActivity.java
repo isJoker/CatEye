@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 
 public class LoginActivity extends FragmentActivity {
 
-    @Bind(R.id.tl_sliding_tab)
+    @Bind(R.id.tl_sliding_tab_login)
     SlidingTabLayout tlSlidingTab;
     @Bind(R.id.viewpager_login)
     ViewPager viewpagerLogin;

@@ -6,19 +6,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flyco.tablayout.SlidingTabLayout;
 import com.google.gson.Gson;
 import com.wjc.cateye.R;
-import com.wjc.cateye.app.MyApplication;
 import com.wjc.cateye.base.BaseFragment;
 import com.wjc.cateye.moive.bean.MoiveAwardsBean;
 import com.wjc.cateye.utils.Constans;
 import com.wjc.cateye.utils.DensityUtil;
 import com.wjc.cateye.utils.LogUtil;
-import com.wjc.cateye.view.userefresh.CatEyeFooter;
-import com.wjc.cateye.view.userefresh.CatEyeHeader;
-import com.wjc.cateye.view.userefresh.SpringView;
+import com.wjc.cateye.view.ObservableScrollView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -35,6 +35,7 @@ import static com.wjc.cateye.app.MyApplication.mContext;
  */
 
 public class FindMoiveFragment extends BaseFragment {
+
 
     private String[] type = new String[]{"爱情", "喜剧", "动画", "剧情", "恐怖", "惊悚", "科幻", "动作", "悬疑", "犯罪", "冒险", "战争", "奇幻", "运动", "家庭", "古装", "武侠", "西部", "历史", "传记", "情色", "歌舞", "黑色电影", "短片", "纪录片", "其他"};
     private String[] address = new String[]{"大陆", "美国", "韩国", "日本", "中国香港", "中国台湾", "泰国", "印度", "法国", "英国", "俄罗斯", "意大利", "西班牙", "德国", "波兰", "澳大利亚", "伊朗", "其他"};
@@ -60,8 +61,10 @@ public class FindMoiveFragment extends BaseFragment {
     LinearLayout llOverseas;
     @Bind(R.id.ll_top100)
     LinearLayout llTop100;
-    @Bind(R.id.refresh_find_moive)
-    SpringView refreshFindMoive;
+    @Bind(R.id.scrollview_find)
+    ObservableScrollView scrollviewFind;
+    //    @Bind(R.id.refresh_find_moive)
+//    SpringView refreshFindMoive;
 
     @Override
     protected String getUrl() {
@@ -82,41 +85,58 @@ public class FindMoiveFragment extends BaseFragment {
         //设置电影奖项
         setMoiveAwards();
 
-    }
-
-    private void initRefresh() {
-        refreshFindMoive.setType(SpringView.Type.FOLLOW);
-        //开始执行刷新
-        refreshFindMoive.setListener(new SpringView.OnFreshListener() {
+        scrollviewFind.setOnScollChangedListener(new ObservableScrollView.OnScollChangedListener() {
             @Override
-            public void onRefresh() {
+            public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
 
-                //模拟联网延时
-                MyApplication.mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshFindMoive.onFinishFreshAndLoad();
-                    }
-                },2000);
+//                PreferenceUtils.putInt(mContext,"find_moive_fragment",y);
 
-            }
+                SlidingTabLayout slidingTab = (SlidingTabLayout) getActivity().findViewById(R.id.tl_sliding_tab);
+                if(slidingTab.getCurrentTab() == 2) {
+                    EventBus.getDefault().postSticky(new Integer(y));
 
-            @Override
-            public void onLoadmore() {
-                refreshFindMoive.callFresh();
+                } /*else if(slidingTab.getCurrentTab() == 1) {
 
-                //模拟联网延时
-                MyApplication.mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshFindMoive.onFinishFreshAndLoad();
-                    }
-                },1000);
+                    EventBus.getDefault().postSticky(new Integer(PreferenceUtils.getInt(mContext,"will_show_fragment",0)));
+                }*/
             }
         });
 
-        refreshFindMoive.setHeader(new CatEyeHeader(getActivity()));
-        refreshFindMoive.setFooter(new CatEyeFooter());
+    }
+
+    private void initRefresh() {
+//        refreshFindMoive.setType(SpringView.Type.FOLLOW);
+//        //开始执行刷新
+//        refreshFindMoive.setListener(new SpringView.OnFreshListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//                //模拟联网延时
+//                MyApplication.mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        refreshFindMoive.onFinishFreshAndLoad();
+//                    }
+//                },2000);
+//
+//            }
+//
+//            @Override
+//            public void onLoadmore() {
+//                refreshFindMoive.callFresh();
+//
+//                //模拟联网延时
+//                MyApplication.mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        refreshFindMoive.onFinishFreshAndLoad();
+//                    }
+//                },1000);
+//            }
+//        });
+//
+//        refreshFindMoive.setHeader(new CatEyeHeader(getActivity()));
+//        refreshFindMoive.setFooter(new CatEyeFooter());
     }
 
     @OnClick({R.id.ll_hot_show, R.id.ll_most_will_show, R.id.ll_overseas, R.id.ll_top100})
